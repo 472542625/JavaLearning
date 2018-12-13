@@ -1,7 +1,7 @@
 #数据库隔离级别
-
+#
 ##read uncommitted 未提交读（select不加锁，update会加锁（行锁），insert不加锁（表锁））
-> ###读
+> >###读
 > ####更新
 > 这种是读取的时候不加锁，因此会有脏读，但是在更新数据的时候会对所有行数据进行加锁，其他事务不能修改数据了，但是没有对表加锁，因此还可以insert数据
   客户端A：
@@ -9,8 +9,6 @@
   set transaction isolation level read uncommitted;
   start transaction;
   update person set age = age - 1 where id = 1;（先在客户端A中更新数据）
-  
-  
 > 客户端B：
   use test;
   set transaction isolation level read uncommitted;
