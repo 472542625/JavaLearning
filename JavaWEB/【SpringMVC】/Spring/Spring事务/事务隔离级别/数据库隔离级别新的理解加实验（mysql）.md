@@ -9,10 +9,11 @@
 > ### 更新  
 > 更新数据的时候会对所有行数据进行加锁，其他事务不能修改数据了，但是没有对表加锁，因此还可以insert数据  
   客户端A：  
-  use test;  
+ ```mysql use test;
   set transaction isolation level read uncommitted;  
   start transaction;  
-  update person set age = age - 1 where id = 1;（先在客户端A中更新数据）  
+  update person set age = age - 1 where id = 1;（先在客户端A中更新数据） 
+ ```
 > 客户端B：  
   use test;  
   set transaction isolation level read uncommitted;  
