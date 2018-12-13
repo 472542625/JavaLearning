@@ -1,0 +1,95 @@
+sql积累
+
+group by········
+group by A列
+表明是 将A列相同字段划分为一类
+select max(user_id),grade from user_info group by grade ;
+意思是得到grade相同的各组的user_id的最大值
+https://blog.csdn.net/kingszelda/article/details/72621971
+
+having
+一般配合在group by使用，和where作用一样
+
+exists(not exists)
+select * from user where exists (select 1);等同于select * from user;
+exists返回true的时候前面执行，exists返回false 的时候前面不执行
+
+in(not in)
+select * from user where userId in (1, 2, 3);等效于
+select * from user where userId = 1 or userId = 2 or userId = 3;
+
+
+
+
+ 
+
+
+SC
+李(1) 语文(001) 11
+李(1) 数学(002) 12
+王(2) 语文(001) 39
+王(2) 数学(002) 33
+select SC.S# from SC where 
+
+a
+李(1)  11
+王(2)  39
+
+b
+李(1)  12
+王(2)  33
+
+
+
+select   SC.S#,avg(SC.score)as avgscore from SC group by SC.S# having avg(SC.score)>60
+select       ,sum(SC.score) from SC group by SC.S#
+
+select count(select sum(SC.score) from SC group by SC.S#)
+
+select SC.C#,Student.S#,Student.Sname,count(SC.C#),sum(score) from student group by Student.S# having  Student.S#=SC.S#
+
+6select Student.Sid,Student.Sname from Student,SC where Student.Sid=SC.Sid and SC.Cid = 1  and EXISTS (select * from Student,SC where Student.Sid=SC.Sid and SC.Cid = 2)
+
+
+
+7select Student.Sid,Student.Sname from Student,SC where Cid = (Select Course.Cid from Course   where Course.Tid = (select Tid from Teacher where Tname ='李老师')) and Student.Sid = SC.Sid
+
+
+8select c.*,Student.Sname from (select a.Sid,a.score1,b.score2 from  (select SC.Sid,SC.score as score1 from SC where SC.Cid=1) a ,(select SC.Sid,SC.score  as score2 from SC where SC.Cid=2) b where a.Sid = b.Sid) c,Student where Student.Sid = c.Sid and c.score1 >c.score2
+
+9select Sid from  (select a.Sid,a.score1,b.score2,c.score3 from  (select SC.Sid,SC.score as score1 from SC where SC.Cid=1) a ,(select SC.Sid,SC.score  as score2 from SC where SC.Cid=2) b ,(select SC.Sid,SC.score  as score3 from SC where SC.Cid=3) c where a.Sid = b.Sid  and b.Sid = c.Sid) d where  d.score1 >60  and d.score2 >60  and d.score3 >60  
+
+(*)10  select Student.Sid,Student.Sname,count(Cid)
+    from Student,SC 
+    where Student.Sid=SC.Sid  group by Sid HAVING  count(Cid) = (select count(*) from Course)
+
+11         select * from  Student where Sid in( select SC.Sid from SC    where   SC.Cid in (select SC.Cid from SC where SC.Sid = 1) and SC.Sid not in(1))
+
+12过
+Student(S#,Sname,Sage,Ssex) 学生表  
+Course(C#,Cname,T#) 课程表 
+SC(S#,C#,score) 成绩表 
+Teacher(T#,Tname) 教师表
+13
+update  SC set score = avg(score) where Cid in (select Cid from Course where Tid in (select Tid from Teacher where Tname ='李老师'))
+https://www.cnblogs.com/zjfjava/p/6012443.html
+
+看到了14
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select a.
+

@@ -1,0 +1,115 @@
+window.onload=function(){
+  new Vue({
+      el:"#my",
+      data:{
+      msg:"Hello World",
+      number:10,
+      html:"<span>123</span>"
+      flag:true,
+      arr:['a','b','c','d'],
+      obj1:{name:'a',age:10}
+      obj2:[{name:'a',age:10},{name:'b',age:11}]     
+     },
+      
+      method:{
+          action:function(){
+             console.log("click");
+          }
+          show1:function(){
+          }
+          show2(){
+          }
+          show3(e){
+             
+          }
+     
+     }
+  
+  })
+
+
+}
+
+1····数据绑定
+
+v-model
+<input type="text" v-model="msg"/>{{msg}}
+v-for
+
+添加数组
+<ul>
+<li v-for="item in arr">{{item}}</li>
+</ul>
+
+或者
+<ul>
+<li v-for="(v,i) in arr">{{v}}====={{i}}</li>
+</ul>
+a=====0
+b=====1
+c=====2
+d=====3
+添加对象
+<ul>
+<li v-for="(v,k) in obj1">{{v}}====={{k}}</li>
+</ul>
+<ul>
+a=====name
+10=====age
+添加对象数组
+<ul>
+<li v-for="(v,i) in obj2">{{v}}====={{i}}</li>
+</ul>
+<ul>
+{name:'a',age:10}=====0
+{name:'b',age:11}=====1
+
+
+2····事件绑定
+
+<button v-on:click="action">click</button>
+等同于<button @:click="action">click</button>
+
+3····控制显示
+<button v-show="flag">show</button>不常用
+<p v-if="number >21">{{number}}</p>///number大于21了展示number
+<p v-else>{{msg}}</p>///number其余的展示其他信息
+
+
+4····模板
+<div v-text="msg"></div>
+<div v-html="html"></div>
+
+
+5····事件冒泡
+
+这样就是button的事件show3后不执行show2和show1
+<div id="my" @click="show1()">A1
+<div @click="show2()">A2
+
+<button @click.stop="show3($event)">A3</button>
+
+</div>
+</div>
+
+
+5····过滤器
+
+filters:{
+  number:function(data,n){//这里传入的data是3.1415926,n是传入的过滤参数
+                return  data.toFixed(n);//保留两位
+         }
+
+}
+<div id="my"> 
+{{3.1415926 | number(2)}}
+</div>
+
+界面返回过滤后的值3.14
+
+
+6····监听器
+
+watch:{
+
+}

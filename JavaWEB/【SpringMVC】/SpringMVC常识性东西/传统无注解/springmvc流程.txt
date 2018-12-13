@@ -1,0 +1,49 @@
+1首先在web.xml里面注册核心控制器
+<!-- 注册springmvc核心控制器 -->
+	<servlet>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+表示对所有的表单里面的*.action请求先进入DispatcherServlet这个东西里面去
+
+
+2 然后再弄到映射器，这个东西负责找到对应的Action来处理，具体就是那个springmvc.xml文件里面的比如 <bean name="/xxxx.action" class="cn.itcast.javaee.springmvc.app07.XXXXAction"></bean>，匹配正确交给对应的Action
+
+ 
+
+3.适配器执行Action里面的业务方法，返回一个叫ModelAndView的对象，里面封装了需要返回的数据以及视图逻辑名称，如果Action中书写的是视图逻辑名称，那么
+（视图解析器）org.springframework.web.servlet.view.InternalResourceViewResolver
+就必须配置，如果Action中书写的是视图真实名称，那么视图解析器就可选配置咯，然后最后再次进去DispatcherServlet大魔王，
+
+
+4，最后DispatcherServlet核心控制器把数据转发到具体的页面咯
+
+
+
+
+
+
+
+还有一种解释
+第一步：客户端通过url发送请求
+
+第二步：核心控制器DispatcherServlet接收到请求
+第三步：通过系统的映射器找到对应的handler(处理器),并返回给核心控制器
+
+第四步：通过核心控制器在找到handler(处理器)对应的适配器，
+
+第五步：由找到的适配器，调用对应的handler(处理器)，并将结果返回给适配器
+
+第六步:适配器将ModelandView对象返回给核心控制器
+
+第七步：由核心控制器将返回的ModelandView给视图解析器
+
+第八步：有核心控制将解析的结果进行响应，最终将结果响应到客户端

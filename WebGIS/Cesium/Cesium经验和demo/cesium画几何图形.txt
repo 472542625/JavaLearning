@@ -1,0 +1,29 @@
+// 长方形
+entities.add({
+    rectangle : {
+        coordinates : Cesium.Rectangle.fromDegrees(-118.0, 38.0, -116.0, 40.0),
+        extrudedHeight : 500000.0,
+        outline : true,
+        outlineColor : Cesium.Color.WHITE,
+        outlineWidth : 0,
+        stRotation : Cesium.Math.toRadians(45),
+        material : Cesium.Color.CHARTREUSE
+    }
+});
+
+// 多边形
+entities.add({
+    polygon : {
+        hierarchy : new Cesium.PolygonHierarchy(Cesium.Cartesian3.fromDegreesArray([-118.0, 30.0,
+                                                                                    -115.0, 30.0,
+                                                                                    -117.1, 31.1,
+                                                                                    -118.0, 33.0,
+                                                                                     -119.0, 34.0,    ])),
+        height : 100000.0,
+        extrudedHeight : 1000.0,
+        // outline : true,
+        outlineColor : Cesium.Color.WHITE,
+        outlineWidth : 4,
+        material : Cesium.Color.fromRandom({alpha : 1.0})
+    }
+});

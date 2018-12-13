@@ -1,0 +1,74 @@
+notify
+不释放锁
+wait
+释放锁
+public class notifyAndwait {
+	static int count = 0;
+
+	public static void main(String[] args) {
+
+		final Object lock = new Object();
+
+		Thread t1 = new Thread(new Runnable() {
+
+			public void run() {
+
+				synchronized (lock) {
+
+					try {
+
+						for (int i = 0; i < 10; i++) {
+							count++;
+							Thread.sleep(500);
+							System.out.println(Thread.currentThread().getName()
+									+ "---添加了元素----" + count);
+							if (count == 5) {
+								System.out.println("已经发出通知");
+								lock.notify();// /这里notify唤醒t2线程的时候此时notify方法不释放锁，锁还在t1手上，直等到for循环结束才释放锁
+							}
+						}
+
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+
+			}
+
+		}, "t1");
+
+		Thread t2 = new Thread(new Runnable() {
+
+			public void run() {
+				synchronized (lock) {
+					if (count != 5) {
+						try {
+							lock.wait();// /count！=5的时候一直等待
+
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						System.out.println(Thread.currentThread().getName()
+								+ "-------收到通知线程停止");
+						throw new RuntimeException();
+
+					}
+				}
+			}
+
+		}, "t2");
+		t2.start();
+		t1.start();
+
+	}
+}
+
+
+上面这段代码，开始t2start后，执行到lock.wait，t2线程释放锁，陷入沉睡状态，
+然后t1执行for循环，lock.notify方法唤醒了t2，但是t1并没有释放lock锁，所以直到for循环执行完了，t1释放锁，t2拿到锁执行count=10！=5,执行到这里不是又wait了吗？为什么会执行到System.out.println(Thread.currentThread().getName()+ "-------收到通知线程停止");
+
+解答原因
+被唤醒并且被执行的线程是从上次阻塞的位置从下开始运行，也就是从wait()方法后开始执行。！！！！

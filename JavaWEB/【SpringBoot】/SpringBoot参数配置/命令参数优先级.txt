@@ -1,0 +1,6 @@
+依次优先级
+1.命令行
+2.ServletConfig和ServletContext
+3.操作系统环境变量
+4.application-{profile}.properties或者yaml文件
+5.application.properties或者yaml文件

@@ -1,0 +1,9 @@
+hashmap就是有一个内部类Entry类型的数组叫table，每个Entry类中有key，value，next表示单链表指向下一个标志，
+这里注意因为加的元素的hash值可能重复，单key又必须唯一，这里就将hash相同的元素放在一个桶里，桶中元素数据结构为单链表形式，
+比如使用get方法的时候遍历
+
+http://www.cnblogs.com/skywang12345/p/3323085.html  hashmap原理
+https://blog.csdn.net/luo_da/article/details/77507315 hash碰撞
+
+
+http://www.cnblogs.com/skywang12345/p/3323085.html  集合源码解析

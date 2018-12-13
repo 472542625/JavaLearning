@@ -1,0 +1,25 @@
+CountDownLatch c = new CountDownLatch(2);
+
+
+线程A中{
+c.await();
+
+}
+
+线程B中{
+c.countDown();
+
+}
+ 
+
+c.await();////这里阻塞，等两次countDown后才放行
+
+主线程代码{
+
+}
+········上面代码是子线程执行一次计数器减1，直到计数器等于0再执行主线程代码
+
+
+
+应用场景
+一个主线程等待，其他线程发出信号，countDown()减到0以后，A线程才继续执行

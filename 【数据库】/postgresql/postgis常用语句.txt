@@ -1,0 +1,24 @@
+创建
+CREATE TABLE point ( ID int4 , ROAD_NAME varchar(25), geom geometry(point,4326));  
+
+增加
+TEXT即是WKT，官网8.4几何构造函数章有详解
+INSERT INTO point VALUES (1,'1',st_geomfromtext('POINT(116.39 39.9)', 4326));
+
+删除
+delete from point where id = 3;
+
+查询
+官网8.7几何输出章
+SELECT ST_AsText(geom) FROM point where id= '1';
+SELECT oid_,x,y, st_asgeojson(st_astext(geom)) as geom  FROM daxing where oid_ =#{oid_};
+<!-1- st_astext(geom)是将geomtry转为wkt文本形式 -->
+<!-2- st_asgeojson(st_astext(geom))是将wkt文本形式转为geojson格式 -->
+<!-3-  as geom意思是将输出的列名改为geom  -->
+
+<!--@Controller处理后得到单个对象，@ResponseBody封装对象为json对象后返回数据的到前端-->
+<!--前端分析json对象，那个geom属性也是嵌套的json格式的字符串，利用JSON.parse()函数将字符串转为json对象，再用 -->
+
+修改
+update point set geom = st_geomfromtext('POINT(124 39)', 4326) where id= '1';
+

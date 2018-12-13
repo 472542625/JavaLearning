@@ -1,0 +1,23 @@
+<!-- xml事务 -->
+
+	<!-- 配置事务通知 -->
+	<tx:advice id="txAdvice" transaction-manager="DataSourceTransactionManager">
+		<tx:attributes>
+			<!-- <tx:method name="get*" read-only="true" propagation="NOT_SUPPORTED" 
+				/> -->
+			<tx:method name="*" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+
+
+
+
+
+<!-- 配置事务切面 -->
+	<aop:config>
+		<!-- 配置事务切点 --> 
+		<aop:pointcut id="transactionPointcut"
+			expression="execution(* com.lt.aop.service.*.*(..))" />
+		<!-- 配置事务通知 -->
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="transactionPointcut" />
+	</aop:config>

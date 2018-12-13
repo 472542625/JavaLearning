@@ -1,0 +1,68 @@
+ 
+xml配置文件
+<bean id="DataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+<property name="datasource" ref="comboPooledDataSourceID"></property> </bean>
+
+
+
+数据库访问层
+//userDao
+@Repository("userDao02")
+public class UserDao {
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	public void add() {
+		System.out.println("userDao002 add....");
+	}
+
+	public void add(String name, Integer age) {
+
+		System.out.println("userDao002 add.... name:" + name + ",age:" + age);
+		String sql = "INSERT INTO users(NAME, age) VALUES(?,?);";
+		int update = jdbcTemplate.update(sql, name, age);
+		System.out.println("insertResult:" + update);
+	}
+
+}
+
+
+
+
+事务类
+@Component
+public class TransactionUtils {
+	@Autowired
+	private DataSourceTransactionManager dataSourceTransactionManager;
+       //开启事务
+	public TransactionStatus begin() {
+		TransactionStatus transaction = dataSourceTransactionManager.getTransaction(new DefaultTransactionDefinition());
+		return transaction;
+	}
+       //提交事务
+	public void commit(TransactionStatus transaction) {
+		dataSourceTransactionManager.commit(transaction);
+	}
+        //回滚事务
+	public void rollback(TransactionStatus transaction) {
+		dataSourceTransactionManager.rollback(transaction);
+	}
+
+}
+服务层
+@Service
+public class UserService {
+
+	@Resource(name = "userDao02")
+	private UserDao userDao;
+	@Autowired
+	private TransactionUtils transactionUtils;	 	 
+	public void add() {
+		System.out.println(" userService02 add...");
+		TransactionUtils begin =transactionUtils.begin(); 		
+		userDao.add("yushengjun", 19);
+                int i =1/0;
+                transactionUtils.commit(begin);
+	}
+}

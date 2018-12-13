@@ -1,0 +1,9 @@
+http://blog.csdn.net/XLSMN/article/details/76229390
+
+3.  var heading = Cesium.Math.toRadians(45.0);//绕垂直于地心的轴旋转  
+
+4.  var pitch = Cesium.Math.toRadians(15.0);  //绕纬度线旋转  
+
+5.  var roll = Cesium.Math.toRadians(0.0);    //绕经度线旋转  
+
+

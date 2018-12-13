@@ -1,0 +1,15 @@
+
+
+
+
+
+Unchecked Exception包括Error与RuntimeException，可以不捕获，可以throws抛出异常（spring事务默认回滚）
+Checked Exception包括其余的，这类必须用try catch捕获（spring事务默认不回滚）
+
+
+
+（运行时）throws RuntimeException异常默认回滚，注意
+
+throws Exception异常默认不回滚，注意
+	@Transactional(rollbackFor = { Exception.class })
+加这个才回滚

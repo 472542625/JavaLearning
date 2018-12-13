@@ -1,0 +1,6 @@
+alter table student modify column time timestamp; --修改time列为timestamp
+alter table student change column address address1 varchar(30)--修改表列名
+alter table student add  column name varchar(10); --添加name列
+alter table student drop column name ; --删除name列
+
+  

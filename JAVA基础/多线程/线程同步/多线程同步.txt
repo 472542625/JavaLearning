@@ -1,0 +1,63 @@
+	
+
+
+
+
+
+=================================================线程同步synchronized 
+
+同步方法
+synchronized方法，假如有三个线程A/B/C，需要保证同一时刻有且只有一个线程在操作共享数据，其他线程必须等到该线程处理完数据后再进行，这种方式有个高尚的名称叫互斥锁，也就是说当一个共享数据被当前正在访问的线程加上互斥锁后，在同一个时刻，其他线程只能处于等待的状态，直到当前线程处理完毕释放该锁。
+
+
+同步块
+synchronized （需要同步的锁定对象）一般都锁定对象
+
+
+死锁（过多的同步容易造成死锁）
+
+public class testThread implements Runnable {
+
+	private static int count = 20;
+
+	public void run() {
+
+		while (count > 0) {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			synchronized (this) {
+				if (count > 0) {
+
+					System.out.println(Thread.currentThread().getName()
+							+ "----" + count--);
+				}
+			}
+		}
+
+	}
+
+	public static void main(String[] args) {
+
+		testThread test = new testThread();
+		Thread thread2 = new Thread(test);
+		Thread thread1 = new Thread(test);
+
+		Thread thread3 = new Thread(test);
+		Thread thread4 = new Thread(test);
+		Thread thread5 = new Thread(test);
+		thread1.start();
+		thread2.start();
+		thread3.start();
+		thread4.start();
+		thread5.start();
+
+	}
+}
+
+
+synchronize(this)是对象锁
+synchronize(testThread.Class)是类锁

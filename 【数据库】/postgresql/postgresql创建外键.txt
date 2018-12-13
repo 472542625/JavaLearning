@@ -1,0 +1,4 @@
+ALTER TABLE daxing ADD FOREIGN KEY (gp_id) REFERENCES daxing_growingpotential(gpid) ÐÂ½¨Íâ¼ü
+
+
+alter table people add FOREIGN key(depid)  REFERENCES dep(id);

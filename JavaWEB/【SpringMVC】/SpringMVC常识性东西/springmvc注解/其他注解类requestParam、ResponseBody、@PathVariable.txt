@@ -1,0 +1,16 @@
+@requestParam 
+后台获取参数一种是request.getParameter（"XXX"），另外一种是用注解@RequestParam直接获取，有三个属性value，required，defaultValue，required=false表示不传的话，会给参数赋值为null，required=true就是必须要有，不带@RequestParam的话默认为true代表必须带参数
+http://blog.csdn.net/a447332241/article/details/76714148
+
+
+@ResponseBody
+用于将Controller的方法返回的对象，通过适当的HttpMessageConverter（转换器）转换为指定格式后，写入到Response对象的body数据区
+返回json、xml等时使用，跳过了modelandview
+Springmvc配置文件中通过<mvc:annotation-driven/>给AnnotationMethodHandlerAdapter初始化7个转换器（包括那个json转换器MappingJacksonHttpMessageConverter）
+
+
+
+
+
+@requestParam和@PathVariable区别 
+@RequestParam 和 @PathVariable  两个都可以接收参数，关键点不同的是@RequestParam 是从request里面拿取值，而 @PathVariable 是从一个URI模板里面来填充（REST）

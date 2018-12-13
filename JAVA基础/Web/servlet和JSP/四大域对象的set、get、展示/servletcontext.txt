@@ -1,0 +1,8 @@
+
+ServletContext
+Web容器在启动时，它会为每个Web应用程序都创建一个对应的ServletContext对象，它代表当前web应用，故可以使用this.ServletConfig.getServletContext()得到ServletContext（context域对象）
+两种获取servletContext对象的方式1ServletConfig.getservletContext()  2this.getservletContext()
+
+转发 this.getServletContext().getRequestDispatcher("/list.jsp").forward(request, response);地址必须以"/"开头，该"/"代表着当前应用的访问路径
+
+getRealPath方法 context.getRealPath("/WEB-INF/classes/db.properties");  

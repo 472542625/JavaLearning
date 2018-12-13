@@ -1,0 +1,7 @@
+Collections.synchronizedMap(集合)
+可以将线程不安全集合转为安全的
+
+
+Map<String,String>map = Collections.synchronizedMap(new HashMap<String,String>());
+
+

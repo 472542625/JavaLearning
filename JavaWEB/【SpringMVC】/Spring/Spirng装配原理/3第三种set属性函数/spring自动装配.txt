@@ -1,0 +1,35 @@
+Dao层
+pulbic class UserDao(){
+
+  public void save(){
+  System.out.println("UserDao.save()业务逻辑层save");
+ }
+
+}
+Service层
+public  class UserService(){
+
+  private UserDao userDao;
+  public void SetUserDao(UserDao userDao){
+     this.userDao=userDao;
+
+  }
+
+  public void save(){
+  System.out.println("UserService.save()业务逻辑层save");
+  userDao.save();
+  }
+}
+
+xml配置文件
+<bean id="userDao" class ="com.test.UserDao"></bean>
+<bean id="userService" class ="com.test.UserService" autowire="byName"></bean>  //byName是默认的，他会找UserService下面的userDao自动装配
+
+这里注意下哈，如果把<bean id="userDao" class ="com.test.UserDao"></bean>里面的userDao改为userDao1，那么默认根据名字（ private UserDao userDao;）就找不到了
+但是如果换为autowire="byType"的话就可以找到，这个是根据唯一类型来弄
+
+
+
+
+ByName 要求Bean的属性名必须要与引用的bean的id保持一致
+ByType 按照类型进行装配， 缺点：如果IOC容器存在多个相同类型的bean的时候，出现异常

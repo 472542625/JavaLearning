@@ -1,0 +1,32 @@
+博客http://www.cnblogs.com/w-wfy/p/6415005.html
+https://www.cnblogs.com/onlywujun/p/3565082.html
+中断线程
+
+它的作用是在线程被阻塞时（如遇到wait、sleep、join等），执行Thread.interrupt();了之后抛出中断异常InterruptedException，然后线程可以继续执行。
+public class testwait extends Thread {
+    static int i = 0;
+
+    @Override
+    public void run() {
+        while (!Thread.currentThread().isInterrupted()) {
+        
+            System.out.println("I'm runing " + i++);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();//①：发出中断请求，设置中断状态
+                //System.out.println(Thread.currentThread().isInterrupted());//②:判断中断状态（不清除中断状态）
+                System.out.println(Thread.interrupted());//③:判断中断状态（清除中断状态）
+            }
+            System.out.println("current thread haven't been broken");
+        }
+
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new testwait();
+        t1.start();
+        //Thread.sleep(1000);
+        //t1.interrupt();
+    }
+} 

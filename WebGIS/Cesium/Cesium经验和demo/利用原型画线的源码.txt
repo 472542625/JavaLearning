@@ -1,0 +1,63 @@
+function drawPolyLine() {
+  // 1.封装PolyLine对象
+  var PolyLinePrimitive = (function() {
+    function _(positions) {
+      this.options = {
+        polyline: {
+          show: true,
+          positions: [],
+          material: Cesium.Color.CORNFLOWERBLUE,
+          width: 5
+        }
+      };
+      this.positions = positions;
+      this._init();
+    }
+
+    _.prototype._init = function() {
+      var _self = this;
+      var _update = function() {
+        return _self.positions;
+      };
+      //实时更新polyline.positions  
+      this.options.polyline.positions = new Cesium.CallbackProperty(_update, false);
+      viewer.entities.add(this.options);
+    };
+
+    return _;
+  })();
+
+  // 2.初始化
+  var scene = viewer.scene;
+
+  var handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
+  var positions = [];
+  var poly = undefined;
+  // 3.鼠标监听事件
+  handler.setInputAction(function(movement) {
+    var cartesian = scene.camera.pickEllipsoid(movement.position, scene.globe.ellipsoid);
+    if (positions.length == 0) {
+      positions.push(cartesian.clone());
+    } ///默认第一次点击的时候加了两个点，负责显示线的初始化不正常  
+    positions.push(cartesian);
+
+  }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+  handler.setInputAction(function(movement) {
+    var cartesian = scene.camera.pickEllipsoid(movement.endPosition, scene.globe.ellipsoid);
+    if (positions.length >= 2) {
+      if (!Cesium.defined(poly)) { //判断如果poly没有被定义的话初始化poly
+        poly = new PolyLinePrimitive(positions);
+      } else { //判断如果poly被初始化的话
+
+        positions.pop();
+        cartesian.y += (1 + Math.random());
+        positions.push(cartesian);
+      }
+    }
+  }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+  handler.setInputAction(function(movement) {
+    handler.destroy();
+  }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
+}

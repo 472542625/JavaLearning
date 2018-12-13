@@ -1,0 +1,18 @@
+就是利用aop
+
+
+@ControllerAdvice(basePackages="com.xxx.controller")
+public class GlobalExceptionHandler{
+  
+     @ExceptionHandler(RuntimeException.class)
+     @ResponseBody
+     public Map<String,Object> errorResult(){
+        Map<String,Object> errorResultMap =  new HashMap<String,Object>();
+
+        errorResultMap.put("errorCode","500");
+        errorResultMap.put("errorMsg","系统错误");
+             return errorResultMap ;
+       
+    }
+   
+}

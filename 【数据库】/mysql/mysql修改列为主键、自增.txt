@@ -1,0 +1,2 @@
+alter table people MODIFY id int primary key
+alter table people MODIFY id int auto_increment

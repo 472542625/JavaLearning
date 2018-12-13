@@ -1,0 +1,17 @@
+包含
+@SpringBootConfiguration，这个本质是@Configuration，@Configuration本质是@Component，代表Sping容器的主配置类
+ 
+
+
+
+@EnableAutoConfiguration 开启自动配置，SpringBoot使用这个标签自动把
+内置的符合条件的Configuration类加载进入应用
+包含了两个注解
+@AutoConfigurationPackage
+@Import({AutoConfigurationImportSelector.class})
+
+
+
+
+
+@ComponentScan自动扫描当前AppMain的包及其子包

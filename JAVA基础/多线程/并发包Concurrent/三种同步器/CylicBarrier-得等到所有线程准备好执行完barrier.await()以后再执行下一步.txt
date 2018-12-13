@@ -1,0 +1,12 @@
+CyclicBarrier barrier = new CyclicBarrier(3);
+
+
+
+比如三个线程里面有：barrier.await();//阻塞
+
+
+得等到所有线程准备好执行完barrier.release()以后再执行下一步
+
+
+
+

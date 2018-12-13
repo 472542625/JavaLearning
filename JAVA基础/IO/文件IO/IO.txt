@@ -1,0 +1,105 @@
+IO流分类
+流向：输入、输出
+数据：字节流：二进制，可以是一切文件，包括纯文本、doc、音频、视频
+      字符流：文本文件
+
+
+节点流
+一、字节流 
+InputStream  read(byte[] b)、read(byte[] b,int off,int len)  +close()
+FileInputStream  
+OutputStream write(byte[] b)、write(byte[] b,int off,int len) +flush()  +close() 
+FileOutputStream 
+读取和写入代码
+File f = new File("d://io.txt");
+		System.out.println("f.getAbsolutePath():" + f.getAbsolutePath());
+		System.out.println("f.getName():" + f.getName());
+		System.out.println("f.getParent():" + f.getParent());
+		System.out.println("f.getPath():" + f.getPath());
+
+		InputStream fis = new FileInputStream(f);
+		byte[] by = new byte[1024];
+		int len = 0;// 接受实际读取大小
+		while (-1 != (len = fis.read(by))) {
+			System.out.println("len:" + len);
+			String info = new String(by, 0, len);
+			System.out.println(info);
+		}
+
+		fis.close();
+
+		File fout = new File("d://io6.txt");
+		OutputStream fisout = new FileOutputStream(fout,true);///true为追加
+
+		String outstr = "123456789";
+		byte[] byout = outstr.getBytes();
+		fisout.write(byout,0,byout.length);
+
+		fisout.flush();
+拷贝代码
+File f = new File("d://io.txt");
+		File fout = new File("d://io6.txt");
+		System.out.println("f.getAbsolutePath():" + f.getAbsolutePath());
+		System.out.println("f.getName():" + f.getName());
+		System.out.println("f.getParent():" + f.getParent());
+		System.out.println("f.getPath():" + f.getPath());
+
+		InputStream fis = new FileInputStream(f);
+		OutputStream fisout = new FileOutputStream(fout, true);
+		byte[] by = new byte[1024];
+		int len = 0;// 接受实际读取大小
+		while (-1 != (len = fis.read(by))) {
+			System.out.println("len:" + len);
+			String info = new String(by, 0, len);
+			System.out.println(info);
+			fisout.write(by);
+		}
+
+		fis.close();
+
+		fisout.flush();
+二、字符流
+Reader read(char[] cbuf) read(char[] cbuf,int off,int len) +close()
+FileReader
+Writer write(char[] cbuf) write(char[] cbuf,int off,int len) +flush() +close()
+       write(String str,int off,int len)
+FileWriter 
+
+
+处理流：
+（增强功能、提供性能，节点流之上）
+一、缓冲流（用法见下提高性能）
+字节缓冲流
+BufferInputStream
+InputStream is = new BufferInputStream(new FileInputStream(file));
+BufferOutputStream
+OutputStream os = new BufferOutputStream(new FileOutputStream(file));
+字符缓冲流（一样）
+BufferReader
+Reader is = new BufferReader(new FileReaderStream(file));
+BufferWrite
+Write os = new BufferWrite(new FileWriteStream(file));
+二、转换流（字节流转为字符流 处理乱码（编码集、解码集））
+1、编码与解码概念
+编码：字符到二进制
+解码：二进制到字符
+2、乱码(1、编码与解码的字符集不统一2、字节缺少，长度丢失)
+解码》》》
+String str = "中国";  //默认编码gbk
+解码》》》
+byte[] data = str.getBytes();
+System.out.println(new String(data));
+如果解码》》》
+byte[] data = str.getBytes("utd-8");//设定编码为utf-8则编码与解码的字符集不统一出现乱码
+
+
+
+
+
+
+
+
+
+总结
+
+

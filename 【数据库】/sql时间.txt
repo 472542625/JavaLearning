@@ -1,0 +1,35 @@
+mysql里面时间类型
+date对应java里面的java.sql.Date date = new java.sql.Date(System.currentTimeMills())----例子2018-04-11表示年月日
+time表示时分秒
+timestamp对应java里面的java.sql.Timestamp timestamp = new java.sql.Timestamp(System.currentTimeMillis())----例子2018-04-11 09:42:27表示年月日时分秒
+
+
+
+
+
+
+
+
+利用dateformat做string转为时间类型
+public static long strDate(String dateStr) {
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		try {
+			return format.parse(dateStr).getTime();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+
+	}
+Date date = new Date(strDate("2015-4-10 10:10:10"));
+			Timestamp timestamp = new Timestamp(strDate("2015-4-10 10:10:10"));
+			String sql = "insert into student(name,age,studate,timestamp) values(?,?,?,?)";
+
+			PreparedStatement pstmt = (PreparedStatement) conn
+					.prepareStatement(sql);
+			pstmt.setObject(1, "tom1");
+			pstmt.setObject(2, "12");
+			pstmt.setObject(3, date);
+			pstmt.setObject(4, timestamp);
+			pstmt.executeUpdate();

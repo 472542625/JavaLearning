@@ -1,0 +1,42 @@
+这里面创建了两个对象
+
+一个是字符串常量池中的abc
+一个是堆中的实例对象new String("abc")
+
+
+
+String str1 = "hello";//hello存放在常量池中，str1在栈中
+String str2 = new String("hello");//hello存放在字符串常量池中（也算是在堆中），new String("hello")存放在堆中，str2在栈中
+
+上面str1、str2只是引用变量，不是对象，所以上面的代码产生了2个对象
+
+
+
+String a ="test";
+String b ="test";
+String c = new String("test");
+String d = c.intern();//手动入字符串常量池
+a和bd相等
+
+
+https://blog.csdn.net/justloveyou_/article/details/60983034
+这个博客讲的很清楚
+下面有几种情况
+String str1 = "java";String str2 = "blog";
+1····String   s = str1+str2; +运算符会在堆中建立起两个String对象，这两个对象的值分别是“java”,"blog",也就是说从字符串常量池中复制这两个值，然后再堆中创建两个对象，然后再建立对象s,然后将“javablog”的堆地址赋给s.  这句话共创建了3个String对象。System.out.println(s=="javablog");//结果是false;
+
+
+
+2····String s="java"+"blog";//直接将javablog对象放入字符串池中，System.out.println(s=="javablog");//结果是true;
+注：
+在常量池中创建了3个===>java、blog 、javablog;
+而且java 和 blog 变成了垃圾内存,不可再访问，JVM会自动调用 垃圾回收机制回收
+在栈中创建了1个===>s;
+String类型的变量都占两片区域; 变量名在栈内；实际地址在堆内 or 常量池内
+
+
+3····String s= str1+"blog";//不放在字符串池中，而是在堆中分分配，System.out.println(s=="javablog");//结果是false;
+
+
+
+

@@ -1,0 +1,25 @@
+加载xml两种方式
+BeanFactory bf =new XmlBeanFactory(new ClassPathResource("bean.xml"));
+ApplicationContext bf = new ClassPathXmlApplicationContext("bean.xml"));
+
+
+这里解析这种
+BeanFactory bf =new XmlBeanFactory(new ClassPathResource("bean.xml"));
+
+
+new ClassPathResource("bean.xml")返回Resource resource
+new XmlBeanFactory(resource)利用loadBeanDefinitions(resource)进行初始化
+
+
+loadBeanDefinitions(resource)
+在XmlBeanFactory构造函数中调用了XmlBeanDefinitionReader类型的reader属性提供的方法this.reader.loadBeanDefinitions(resource)
+
+对resource封装为EncodeResource类
+
+doloadBeanDefinitions()方法获取对xml文件的验证模式 
+int validationMode = getValidationModeForResource(resource)
+加载xml文件并得到对应的
+Document Docement doc = this.documentLoader.loadDocument(inputSource,getEntityResolver(),this.errHandler,validationMode,isNamespaceAware());
+根据返回的Document注册Bean信息  
+return registerBeanDefinations(doc,resource);
+

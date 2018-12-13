@@ -1,0 +1,32 @@
+Class.forName("com.mysql.jdbc.Dirver"); 
+String url ="mysql:jdbc//localhost:3306/yourdatabase"
+Connection conn = DirverManager.getConnection(url,username,passowrd);
+
+ 
+
+这里有三种
+1.Statement 查询是executeQuery(sql) 插入、删除、更新是executeUpdate(sql)
+String sql ="select * from user ";
+Statement st = conn.createStatement();
+ResultSet rs=st.executeQuery(sql);
+st.execute();
+rs.close();
+st.close();
+conn.close();
+
+
+
+2.PreperStatement  查询是executeQuery() 插入、删除、更新是executeUpdate() 
+String sql ="select * from user where name =?";
+PreperStatement pst = conn.prepareStatement(sql);
+pst.setString(1,"litao");
+ResultSet rs = ps.executequery();
+
+
+
+3.CallableStatement调用存储过程
+CallableStatement cst= conn.prepareCall("call functionname(?)");
+cst.registerOutParameter(1,Types.INTEGER);
+cst.execute();
+
+return cst.getInt(1);

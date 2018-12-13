@@ -1,0 +1,9 @@
+当属性名字和数据库表列名一样的时候可以用resultType
+<select id="findById" parameterType="int" resultType="cn.itcast.javaee.mybatis.app09.Student">
+		select id,name,sal
+		from students1
+		where id = #{xxxxxxxxxxxxxxxxxx}
+	</select>
+
+ resultType="cn.itcast.javaee.mybatis.app09.Student"建议写个全路径
+

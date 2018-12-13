@@ -1,0 +1,4 @@
+countdownlatch是一个线程执行await等其他线程消耗计数器（执行countdown方法）后执行
+
+
+cyclicbarrier是所有线程都到一个阶段（都执行了await方法）以后再执行下一个阶段

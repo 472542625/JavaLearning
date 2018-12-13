@@ -1,0 +1,27 @@
+为每一个线程提供一个局部变量
+
+
+
+
+
+
+为每个线程提供一个本线程的局部变量
+
+public class ReNumber{
+public int count = 0 ;
+
+public static  ThreadLocal<Integer> threadlocal = new ThreadLocal<Integer>(){
+
+   protected Integer initialValue(){
+      return  0 ;
+   }
+}
+public String getNumber(){
+
+    count = threadLocal.get() + 1 ;
+    threadlocal.set(count); 
+    return count+"";
+
+}
+}
+这个类ReNumber放在多个线程中，他都是属于单独线程的

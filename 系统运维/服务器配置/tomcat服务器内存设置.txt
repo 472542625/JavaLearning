@@ -1,0 +1,2 @@
+在.bat文件第一行下面加
+set JAVA_OPTS=-server -Xms256m -Xmx512m -XX:PermSize=128M -XX:MaxPermSize=256M

@@ -1,0 +1,54 @@
+以@Resource为例，透析注解的本质，spring中是如何使用注解的
+http://blog.csdn.net/qq_27093465/article/details/52702463
+
+
+spring类扫描注入-----类扫描的注解解析器
+@Component
+http://blog.csdn.net/qq_27093465/article/details/52710925
+
+
+Dao层
+@Component(value="userDao")//  这个等于<bean id="userDao" class ="com.test.UserDao"></bean>
+//不写value的话就是类名称小写装配
+pulbic class UserDao(){
+  public void save(){
+  System.out.println("UserDao.save()业务逻辑层save");
+ }
+}
+
+Service层
+@Component(value="userService")//这个等于<bean id="userService" class ="com.test.UserService"></bean>
+//不写value的话就是类名首字母小写形成的字符串
+public  class UserService(){
+  @Resource(name="userDao")//等于<property name="userDao" ref="userDao"></property>
+                          //如果不写name的话，默认是变量名称
+  private UserDao userDao;
+  public void SetUserDao(UserDao userDao){
+     this.userDao=userDao;
+  }
+  public void save(){
+  System.out.println("UserService.save()业务逻辑层save");
+  userDao.save();
+  }
+}
+
+
+
+xml配置文件
+<context:component-scan base-package="com.test"></context:component-scan>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+此外
+@Autowired 注释，默认采用byType自动装配策略 ，它可以对类成员变量、方法及构造函数进行标注，完成自动装配的工作。 通过 @Autowired的使用来消除 set ，get方法。

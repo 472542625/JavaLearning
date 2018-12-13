@@ -1,0 +1,8 @@
+1、spring-boot-starter-xxxx：SpringBoot中自带的starter
+2、xxx-spring-boot-starter：第三方和SpringBoot集成提供的starter
+如druid-spring-boot-starter（包含了druid数据源的原始依赖+自动配置功能的依赖）
+
+ spring.datasource.druid.driver-class-name=org.postgresql.Driver
+spring.datasource.druid.username=postgres
+spring.datasource.druid.password=123456
+spring.datasource.druid.url=jdbc:postgresql://localhost:5432/llsss?characterEncoding=UTF-8

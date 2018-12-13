@@ -1,0 +1,30 @@
+下面delimiter和存储过程没有关系
+DELIMITER $$------------这个意思是原本;是结束符号，这里改为了$$
+DELIMITER ;-------------这个意思结束符号重新改为了; 
+
+
+
+
+
+
+delimiter $$
+
+ create  procedure updatestdname(in stdid int)
+ begin
+ update student set name = 'li'  
+ where id = stdid ;
+ end$$
+
+
+delimiter  ;
+
+
+
+
+
+
+
+
+
+执行
+call updatestdname(8);

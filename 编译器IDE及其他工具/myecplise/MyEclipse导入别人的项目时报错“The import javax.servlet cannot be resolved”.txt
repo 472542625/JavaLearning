@@ -1,0 +1,7 @@
+在把别人的项目导入Eclipse里面时，原本正常跑的项目会提示如下的两个错误： 
+1、The import javax.servlet cannot be resolved 
+2、The import javax.servlet.http.HttpServletRequest cannot be resolved 
+意思是没有引入相应的jar包。之前找过一些解决办法，其中有把tomcat目录中lib目录下两个相应的包拷贝到项目的web-inf|lib下，这样错误提示没有了，但是程序调试会报错，出现jar包冲突的提示。冲突这是必然的，因为没有找到问题的根本所在。
+
+后来又看到了另一篇博客中有写到，“具体原因是我们工程里面web-inf/lib目录下少了相应的包：Package javax.servlet.http引起的；通俗且确切的讲就是缺少TOMCAT_HOME\lib下的servlet-api.jar。我导入别人的项目，在别人的机器上他配置了Server，一般都是tomcat，而在拷贝的过程中Server的那些library是不会随项目一起拷贝过来的，除非别人把tomcat的library已经拷贝到WEB-INF\lib下了。” 
+既然问题的根本原因找到了，解决办法就有了。Project -> Properties -> Java Build Path -> Add Library -> Server Runtime -> next -> 选择你的Server -> Finish

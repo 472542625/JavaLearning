@@ -1,0 +1,50 @@
+第一种很差
+<resultMap type="com.lt.aop.entity.People" id="people">
+	<id column="id" jdbcType="INTEGER" property="gid" />
+	<result column="name" jdbcType="VARCHAR" property="area" />
+	<result column="money" jdbcType="INTEGER" property="deptname" />
+	<result property="dept.id" column="id"/>	 
+        <result property="dept.deptname" column="deptname" />
+</resultMap>
+第二种分开
+<resultMap type="com.lt.aop.entity.Dept" id = "dept">
+        <result column="id" jdbcType="INTEGER" property="id" />
+	<result column="deptname" jdbcType="VARCHAR" property="deptname" />
+	 
+</resultMap>
+<resultMap type="com.lt.aop.entity.People" id="people">
+	<id column="id" jdbcType="INTEGER" property="gid" />
+	<result column="name" jdbcType="VARCHAR" property="area" />
+	<result column="money" jdbcType="INTEGER" property="deptname" />
+	<association property="dept" resultMap="dept"/>	
+</resultMap>
+第三种直接嵌套
+<resultMap type="com.lt.aop.entity.People" id="people">
+	<id column="id" jdbcType="INTEGER" property="gid" />
+	<result column="name" jdbcType="VARCHAR" property="area" />
+	<result column="money" jdbcType="INTEGER" property="deptname" />
+	<association property="dept" javaType="com.lt.aop.entity.Dept">
+	  <id column="id" property="id" />
+	  <result column="deptname" property="deptname" />
+	</association>
+</resultMap>
+第四种最常用
+定义DeptMapper
+单独定义一个DeptMapper的findById,写好xml······
+<resultMap type="com.lt.aop.entity.People" id="people">
+	<id column="id" jdbcType="INTEGER" property="gid" />
+	<result column="name" jdbcType="VARCHAR" property="area" />
+	<result column="money" jdbcType="INTEGER" property="deptname" />
+	<association property="dept" column="depid" select="com.lt.aop.dao.DeptMapper.findById"/>	////是参数，
+</resultMap>
+过程是查询id为X的People，查到了外键depid号，接着级联查询com.lt.aop.dao.DeptMapper.findById，返回最终的结果
+
+
+
+
+
+
+
+
+
+

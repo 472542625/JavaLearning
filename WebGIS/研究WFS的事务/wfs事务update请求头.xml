@@ -1,0 +1,74 @@
+<Transaction xmlns="http://www.opengis.net/wfs" service="WFS" version="1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd">
+<Update typeName="feature:nyc_roads_shp" xmlns:feature="http://geoserver.org/water">
+<Property>
+<Name>the_geom</Name>
+<Value><MultiLineString xmlns="http://www.opengis.net/gml" srsName="EPSG:4326"><lineStringMember><LineString srsName="EPSG:4326"><posList>-73.94220363687613 40.74994846234422 -73.89825832437613 40.753038367145194 -73.65905418247948 40.72124177438382 -73.63562356531764 40.53447038274301 -73.845006369064 40.60691521609975 -73.95945354552039 40.57449787735817 -73.90169155191519 40.689866980100994 -73.9628030021105 40.687807043566806</posList></LineString></lineStringMember></MultiLineString></Value>
+</Property>
+
+
+<Property><Name>modified</Name><Value>7</Value></Property>
+
+<Property><Name>name</Name><Value>7</Value></Property>
+
+<Property><Name>vsam</Name><Value>0</Value></Property>
+
+<Property><Name>sourcedate</Name></Property>
+
+<Property><Name>sourcetype</Name></Property>
+
+<Property><Name>source_id</Name><Value>7</Value></Property>
+
+<Property><Name>borough</Name></Property>
+
+<Property><Name>feat_code</Name><Value>0</Value></Property>
+
+<Property><Name>feat_desc</Name><Value>11</Value></Property>
+
+<Property><Name>exported</Name><Value>true</Value></Property>
+
+<Property><Name>feat_type</Name><Value>0</Value></Property>
+
+<Filter xmlns="http://www.opengis.net/ogc"><FeatureId fid="nyc_roads_shp.1313"/></Filter>
+
+</Update>
+</Transaction>
+////shp正确的
+
+
+
+
+
+
+
+
+///postgis错误的
+<Transaction xmlns="http://www.opengis.net/wfs" service="WFS" version="1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd">
+<Update typeName="feature:nyc_roads" xmlns:feature="http://geoserver.org/water">
+<Property>
+<Name>the_geom</Name>
+<Value><MultiLineString xmlns="http://www.opengis.net/gml" srsName="EPSG:4326"><lineStringMember><LineString srsName="EPSG:4326"><posList>-74.00197460121225 40.71868549774401 -73.98365779967081 40.69677978536298 -73.94772960609507 40.721947063910314</posList></LineString></lineStringMember></MultiLineString></Value>
+</Property>
+
+<Property><Name>modified</Name><Value>nyc_roads1.new.3</Value></Property>
+
+<Property><Name>name</Name><Value>nyc_roads1.new.3</Value></Property>
+
+<Property><Name>vsam</Name><Value>0</Value></Property>
+
+<Property><Name>sourcedate</Name><Value></Value></Property>
+
+<Property><Name>sourcetype</Name><Value></Value></Property>
+
+<Property><Name>source_id</Name><Value>3</Value></Property>
+
+<Property><Name>borough</Name><Value></Value></Property>
+
+<Property><Name>feat_code</Name><Value>0</Value></Property>
+
+<Property><Name>feat_desc</Name><Value>11</Value></Property>
+
+<Property><Name>exported</Name><Value>true</Value></Property>
+
+<Property><Name>feat_type</Name><Value>0</Value></Property>
+<Filter xmlns="http://www.opengis.net/ogc"><FeatureId fid="nyc_roads.1306"/></Filter>
+</Update></Transaction>

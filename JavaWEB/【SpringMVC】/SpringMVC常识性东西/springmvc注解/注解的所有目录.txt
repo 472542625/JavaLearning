@@ -1,0 +1,12 @@
+<context:component-scan/> 扫描指定的包中的类上的注解，常用的注解有：
+
+@Controller 声明Action组件
+@Service    声明Service组件    @Service("myMovieLister") 
+@Repository 声明Dao组件
+@Component   泛指组件, 当不好归类时. 
+@RequestMapping("/menu")  请求映射
+@Resource  用于注入，( j2ee提供的 ) 默认首字母小写
+@Autowired 用于注入，(spring提供的) 默认按类型装配 
+@Transactional( rollbackFor={Exception.class}) 事务管理
+@ResponseBody
+@Scope("prototype")   设定bean的作用域

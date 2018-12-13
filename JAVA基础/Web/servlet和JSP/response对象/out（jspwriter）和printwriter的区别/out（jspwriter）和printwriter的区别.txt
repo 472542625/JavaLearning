@@ -1,0 +1,1 @@
+(jspPrinter)out.writer()的是jsp结束后再输出，(Printer)response.getwriter().writer()直接输出  第四种情况jsp页面执行完毕

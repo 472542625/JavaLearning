@@ -1,0 +1,6 @@
+静态资源放在resources下面
+
+创建个文件夹static
+
+比如有个static/1.png
+localhost:8080/1.png访问即可

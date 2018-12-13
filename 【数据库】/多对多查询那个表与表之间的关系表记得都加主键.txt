@@ -1,0 +1,3 @@
+在关系表里面加外键
+
+https://blog.csdn.net/zuosixiaonengshou/article/details/53011452

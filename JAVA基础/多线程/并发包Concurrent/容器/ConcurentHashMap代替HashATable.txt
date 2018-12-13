@@ -1,0 +1,9 @@
+hashtable线程安全但是效率很低
+
+ConcurrenHashMap
+将一个整体拆分成多个小的HashTable，默认分为16段
+
+
+
+16个Segment意思可以同 时接受16个线程的并发访问
+

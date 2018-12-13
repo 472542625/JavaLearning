@@ -1,0 +1,35 @@
+
+@EnableTransactionManagement在appMain入口处 等价xml配置的开启注解事务<tx:annotaion-driven/>
+然后再方法上加@Transaction(readOnly=true)即可加上事务
+
+
+
+
+
+xml的方式是在appMain入口处加
+@ImportResource("classpath:XXXX.xml")
+
+@Bean
+public PlatformTransactionManager txManager(DataSource dataSource){
+
+   DataSourceTransactionManager txManager = new DataSourceTransactionManager();
+   txManager.setDataSource(dataSource);
+   return txManager;
+
+}
+
+
+XXXX.xml里面写
+    <tx:advice id="txAdvice" transaction-manager="txManager"><-- 这里写-->
+        <tx:attributes>
+            <tx:method name="*"/>
+            <tx:method name="get*" propagation="SUPPORTS"
+                       read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut
+                expression="execution(* com.lc.web..*.*(..))" id="txPoint"/>
+        <aop:advisor
+                advice-ref="txAdvice" pointcut-ref="txPoint"/>
+    </aop:config>

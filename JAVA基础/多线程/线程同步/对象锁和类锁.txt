@@ -1,0 +1,6 @@
+对象锁不同对象不同步
+类锁不同对象也同步XXX.class
+
+https://m.jb51.net/article/140175.htm
+
+https://m.jb51.net/article/140175.htm?from=singlemessage&isappinstalled=0

@@ -1,0 +1,18 @@
+ <% out.println(basePath);%><br>
+<%
+out.println(request.getScheme());%><br>
+<%
+out.println(request.getServerName());%><br>
+<%
+out.println(request.getServerPort());%><br>
+<%
+out.println(path);%><br>
+
+
+
+Êä³ö
+http://localhost:8085/testjsp/ 
+http 
+localhost 
+8085 
+/testjsp 

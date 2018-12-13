@@ -1,0 +1,62 @@
+第一种方法：利用默认的构造方法
+public class HelloIoc {    
+    public void sayHello(){
+        System.out.println("Hello IOC");
+    }}
+····
+<bean id="helloIoc" class="com.ys.ioc.HelloIoc" ></bean> 
+第二种方法：利用静态工厂方法
+public class HelloStaticFactory {
+    public HelloStaticFactory(){
+        System.out.println("HelloStaticFactory constructor");
+    }
+    //静态工厂方法
+    public static HelloIoc getInstances(){
+        return new HelloIoc();
+    }
+}
+····
+<bean id="helloStaticFactory" factory-method="getInstances" class="com.ys.ioc.HelloStaticFactory"></bean>
+第三种方法：利用实例工厂方法
+public class HelloInstanceFactory {
+    public HelloInstanceFactory(){
+        System.out.println("实例工厂方法构造函数");
+    }
+    //利用实例工厂方法创建对象
+    public HelloIoc getInstance(){
+        HelloIoc instanceIoc = new HelloIoc();
+        return instanceIoc;
+    }}
+····
+<bean id="instanceFactory" class="com.ys.ioc.HelloInstanceFactory"></bean> 
+<bean id="instance" factory-bean="instanceFactory" factory-method="getInstance"></bean> 
+
+
+
+
+
+
+创建对象的细节问题
+1) 对象创建： 单例/多例 
+在bean.xml配置文件中，配置scope=”singleton”,为单例创建对象，如果不配置，默认也是单例方式。主要应用于service/dao层还有一些utils工具类等只需要在服务器启动时初始化一次即可。 
+scope=”prototype”,表示多例方式创建对象，也就是当用户需要使用这个对象时即创建对象，在ssh项目整合中主要应用于Action对象。这种方式一般在服务器启动时不会创建对象，在每次使用才创建。
+
+2) 什么时候创建?上面其实已经说了 
+scope=”prototype” 在用到对象的时候，才创建对象。（在ioc容器初始化之后） 
+scope=”singleton” 在服务器启动时候(容器初始化之前)， 就已经创建了bean，且整个应用只有一个。
+
+3)是否延迟创建 
+lazy-init=”false” 默认为false, 不延迟创建，即在启动时候就创建对象 
+lazy-init=”true” 延迟初始化， 在用到对象的时候才创建对象 
+（只对单例有效）因为多例本来就是访问对象时才创建。
+
+4) 创建对象之后，初始化/销毁 
+init-method=”init_user” 【对应对象的init_user方法，在对象创建好之后执行 】 
+destroy-method=”destroy_user” 【在调用容器对象的destroy方法时候执行，(容器用实现类)】
+
+
+
+
+
+
+

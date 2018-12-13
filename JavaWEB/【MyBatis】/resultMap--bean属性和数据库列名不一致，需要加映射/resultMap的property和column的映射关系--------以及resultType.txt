@@ -1,0 +1,17 @@
+当属性名字和数据库表列名不一样的时候用resultMap
+<resultMap type="cn.itcast.javaee.mybatis.app09.Student" id="studentMap">
+		<id property="id" column="students_id"/>
+		<result property="name" column="students_name"/>
+		<result property="sal" column="students_sal"/>
+</resultMap>
+对这个理解是一种映射关系，property是类实体的属性，必须和实体类属性名同名，column是数据库列名，这是建立一种映射关系
+
+如
+<select id="findById" parameterType="int" resultMap="studentMap">
+		select students_id,students_name,students_sal
+		from students
+		where students_id = #{xxxxxxxxxxxxxxxxxx}////这个类型int的无所谓
+	</select>
+返回的是cn.itcast.javaee.mybatis.app09.Student
+返回的students_id,students_name,students_sal，和studentMap（Student）对应的属性（id,name,sal）映射结果相互匹配
+

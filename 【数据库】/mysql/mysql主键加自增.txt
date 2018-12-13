@@ -1,0 +1,2 @@
+
+ alter table student change  sid sid int not null auto_increment ;给sid列主键加自增

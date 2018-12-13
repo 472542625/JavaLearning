@@ -1,0 +1,30 @@
+ https://www.cnblogs.com/fengsehng/p/6048609.html
+Callable有返回值，和FutureTask结合使用，Runnable没有返回值
+ 
+        MyCallable callable1 = new MyCallable(1000);                       // 要执行的任务  
+        MyCallable callable2 = new MyCallable(2000);  
+
+        FutureTask<String> futureTask1 = new FutureTask<String>(callable1);// 将Callable写的任务封装到一个由执行者调度的FutureTask对象  
+        FutureTask<String> futureTask2 = new FutureTask<String>(callable2);  
+
+        ExecutorService executor = Executors.newFixedThreadPool(2);        // 创建线程池并返回ExecutorService实例  
+        executor.execute(futureTask1);  // 执行任务  
+        executor.execute(futureTask2);   
+
+
+ ····· 也可以使用submit，这个执行有返回值Future
+
+         // 执行任务  
+        
+   
+         Future f1 =  executor.submit(futureTask1);
+         Future f2 =  executor.submit(futureTask2);   
+         f1.get();//异步调用///对应结果
+
+
+  
+ 
+ 
+         
+ 
+ 

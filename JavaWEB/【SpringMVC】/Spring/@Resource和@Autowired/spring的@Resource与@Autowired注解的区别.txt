@@ -1,0 +1,3 @@
+http://blog.csdn.net/wangzuojia001/article/details/54312074
+resource默认byname
+autowired默认bytype，所以在我们的dao和service交互的时候可以随意使用这个

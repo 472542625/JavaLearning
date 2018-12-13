@@ -1,0 +1,56 @@
+更新 
+@Test///多个参数
+public void add() throws SQLException {
+         //将数据源传递给QueryRunner，QueryRunner内部通过数据源获取数据库连接
+         QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
+         String sql = "insert into users(name,password,email,birthday) values(?,?,?,?)";
+          Object params[] = {"孤傲苍狼","123", "gacl@sina.com", new Date()};
+          //Object params[] = {"白虎神皇","123", "gacl@sina.com", "1988-05-07"};
+          qr.update(sql, params);}
+      
+@Test///一个参数
+public void delete() throws SQLException { 
+          QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
+          String sql = "delete from users where id=?";
+          qr.update(sql, 1);}
+
+
+查询
+64     @Test
+ 65     public void find() throws SQLException {
+ 66         QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
+ 67         String sql = "select * from users where id=?";
+ 68         Object params[] = {2};
+ 69         User user = (User) qr.query(sql, params, new BeanHandler(User.class));
+ 70         System.out.println(user.getBirthday());
+ 71     }
+ 72 
+ 73     @Test
+ 74     public void getAll() throws SQLException {
+ 75         QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
+ 76         String sql = "select * from users";
+ 77         List list = (List) qr.query(sql, new BeanListHandler(User.class));
+ 78         System.out.println(list.size());
+ 79     }
+
+
+ 
+
+
+
+
+
+
+///BeanHandler   BeanListHandler  ....这里这些是指返回值的类型，第一个是一个bean对象，第二个是个bean 的list集合，还有（scalarHandler）单行单列一个值得
+
+ResultSetHandler的各个实现类：
+ArrayHandler：把结果集中的第一行数据转成对象数组。
+ArrayListHandler：把结果集中的每一行数据都转成一个对象数组，再存放到List中。
+BeanHandler：将结果集中的第一行数据封装到一个对应的JavaBean实例中。
+BeanListHandler：将结果集中的每一行数据都封装到一个对应的JavaBean实例中，存放到List里。//重点
+MapHandler：将结果集中的第一行数据封装到一个Map里，key是列名，value就是对应的值。//重点
+MapListHandler：将结果集中的每一行数据都封装到一个Map里，然后再存放到List
+ColumnListHandler：将结果集中某一列的数据存放到List中。
+KeyedHandler(name)：将结果集中的每一行数据都封装到一个Map里(List<Map>)，再把这些map再存到一个map里，其key为指定的列。
+ScalarHandler:将结果集第一行的某一列放到某个对象中。//重点
+上面这些都是继承接口ResultSetHandler这个的

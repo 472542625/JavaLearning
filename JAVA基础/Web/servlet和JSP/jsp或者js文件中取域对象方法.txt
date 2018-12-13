@@ -1,0 +1,6 @@
+pageContext.setAttribute("appPath", request.getContextPath());
+这种是${appPath}这么访问
+
+
+String treename = (String)request.getAttribute("treename");
+这种是alert("<%=treename%>");这么访问（<%=treename%>）

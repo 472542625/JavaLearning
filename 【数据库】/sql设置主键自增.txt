@@ -1,0 +1,11 @@
+CREATE SEQUENCE users_id_seq  
+START WITH 1  
+INCREMENT BY 1  
+NO MINVALUE  
+NO MAXVALUE  
+CACHE 1;  
+  
+alter table daxing_coordinate alter column coordinateid set default nextval('users_id_seq');  
+
+
+

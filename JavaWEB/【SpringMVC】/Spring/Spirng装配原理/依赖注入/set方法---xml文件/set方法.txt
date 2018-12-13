@@ -1,0 +1,35 @@
+需要set方法，方法名称setXXXX
+set后面第一个字母大小写无所谓，其余必须一致
+
+
+
+ <bean id="dao" class="com.lt.test13.dao.dao"></bean>
+ <bean id= "service" class="com.lt.test13.service.service">
+ <property name="daotest" ref="dao"></property>
+ </bean>
+
+
+
+
+
+
+public class service {
+
+	
+	dao daotest123;
+
+	public void print() {
+		daotest123.print();
+
+	}
+
+	public void setDaotest(dao daotest12) {
+		this.daotest123 = daotest12;
+	}
+
+
+
+}
+
+
+set后面的和name="daotest"这个必须一致，setDaotest，也可以是setdaotest，其余不行，

@@ -1,0 +1,32 @@
+首先安装编译pcre
+[root@bigdata1804-1 hadoop]#  tar -zxvf pcre-8.32.tar.gz   
+[root@bigdata1804-1 hadoop]#  cd pcre-8.32  
+[root@bigdata1804-1 pcre-8.32]# ./configure  
+[root@bigdata1804-1 pcre-8.32]# make  
+[root@bigdata1804-1 pcre-8.32]# sudo make install  
+
+再安装编译nginx
+[root@bigdata1804-1 hadoop]# tar -zxvf nginx-1.6.3.tar.gz
+[root@bigdata1804-1 hadoop]# cd nginx-1.6.3
+[root@bigdata1804-1 nginx-1.6.3]# ./configure --prefix=/home/hadoop/nginx --without-http_gzip_module
+[root@bigdata1804-1 nginx-1.6.3]# sudo make && sudo  make install
+
+启动配置nginx
+[root@bigdata1804-1 hadoop]# vim nginx/conf/nginx.conf
+#user  nobody;改为user root
+
+
+[root@bigdata1804-1 hadoop]# cd nginx/sbin
+[root@bigdata1804-1 sbin]# sudo ldconfig
+[root@bigdata1804-1 sbin]# ./nginx
+
+
+停止服务器
+[root@bigdata1804-1 sbin]# nginx -s stop
+[root@bigdata1804-1 sbin]# kill pid
+
+重新加载配置文件
+[root@bigdata1804-1 sbin]# nginx -s reload
+
+
+ 

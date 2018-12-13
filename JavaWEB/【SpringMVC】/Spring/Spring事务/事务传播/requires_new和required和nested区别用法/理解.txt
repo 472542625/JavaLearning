@@ -1,0 +1,14 @@
+NESTED和REQUIRED修饰的内部方法，当外部方法有事务的时候，属于外部方法事务
+因此：外部方法异常，他们也身处其中，因此内部都回滚
+      内部方法异常，NESTED有单独保存点,因此外部不回滚，REQUIRED和外部事务是一体的，因此外部回滚
+
+
+
+NESTED和REQUIRES_NEW
+因此：内部方法异常，因为··NESTED有单独保存点，··REQUIRES_NEW是单独事务，外部都不回滚
+      外部方法异常，NESTED会回滚，REQUIRES_NEW单独事务不会滚
+
+ 
+      
+https://blog.csdn.net/wangjunjun2008/article/details/53669951
+请看requires_new不起作用的原因

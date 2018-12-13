@@ -1,0 +1,11 @@
+mysql
+
+varchar、char-----------String
+int、tinyint、smallint、integer----------Integer
+bigint-----------Long
+double、float-----------Double
+clob----java.sql.Clob
+blob-----java.sql.Blob
+date-----java.sql.Date
+time----java.sql.Time
+timestamp-----java.sql.Timetamp

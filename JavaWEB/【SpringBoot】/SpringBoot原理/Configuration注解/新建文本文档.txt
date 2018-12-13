@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+ 
+    <bean id="helloBean" class="com.yiibai.hello.impl.HelloWorldImpl">
+        
+</beans>
+
+
+吉丼噐，，，，，，，，，，，，
+package com.yiibai.config;，
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import com.yiibai.hello.HelloWorld;
+import com.yiibai.hello.impl.HelloWorldImpl;
+
+@Configuration
+public class AppConfig {
+    
+    @Bean(name="helloBean")
+    public HelloWorld helloWorld() {
+        return new HelloWorldImpl();
+    }
+    
+}
+

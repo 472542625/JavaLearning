@@ -1,0 +1,1 @@
+记得在webapp下面创建WEB-INF文件夹，再创建web.xml文件就不报错

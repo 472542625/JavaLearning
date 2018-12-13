@@ -1,0 +1,63 @@
+import java.util.concurrent.CountDownLatch;
+
+public class CountDownLatchtest {
+	static int count = 0;
+
+	public static void main(String[] args) {
+
+		final Object lock = new Object();
+
+		final CountDownLatch latch = new CountDownLatch(1);///这里1代表latch.countDown();一次，如果是2的话需要latch.countDown()两次
+
+		Thread t1 = new Thread(new Runnable() {
+
+			public void run() {
+
+				try {
+
+					for (int i = 0; i < 10; i++) {
+						count++;
+						Thread.sleep(500);
+						System.out.println(Thread.currentThread().getName()
+								+ "---添加了元素----" + count);
+						if (count == 5) {
+							System.out.println("已经发出通知");
+							latch.countDown();
+						}
+					}
+
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		}, "t1");
+
+		Thread t2 = new Thread(new Runnable() {
+
+			public void run() {
+
+				if (count != 5) {
+					try {
+						latch.await();
+
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println(Thread.currentThread().getName()
+							+ "-------收到通知线程停止");
+					throw new RuntimeException();
+
+				}
+
+			}
+
+		}, "t2");
+		t2.start();
+		t1.start();
+
+	}
+}

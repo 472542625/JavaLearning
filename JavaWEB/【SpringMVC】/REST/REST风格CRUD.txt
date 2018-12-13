@@ -1,0 +1,4 @@
+GET "${appPath}/Point/"+gid
+POST "${appPath}/Point"
+PUT  "${appPath}/Point/"+gid 
+DELETE  "${appPath}/Point/"+gid 

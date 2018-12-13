@@ -1,0 +1,19 @@
+在执行SQL语句之前，先执行start transaction，这就开启了一个事务（事务的起点），然后可以去执行多条SQL语句，最后要结束事务，
+commit表示提交，即事务中的多条SQL语句所作出的影响会持久到数据库中，
+或者rollback，表示回滚到事务的起点，之前做的所有操作都被撤销了。
+
+mysql
+开启事务：start transaction
+-----这里是sql语句---
+结束事务：commit或rollback
+
+
+
+JDBC
+try{
+     con.setAutoCommit(false);//开启事务
+     ......
+     con.commit();//try的最后提交事务      
+} catch（） {
+    con.rollback();//回滚事务
+}

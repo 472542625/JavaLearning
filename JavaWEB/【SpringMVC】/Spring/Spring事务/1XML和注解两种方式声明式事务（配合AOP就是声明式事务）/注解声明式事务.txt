@@ -1,0 +1,23 @@
+<bean id="DataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+<property name="datasource" ref="comboPooledDataSourceID"></property> </bean> 
+采用@Transactional注解方式使用事务
+<tx:aoontation-driven transaction-manager="DataSourceTransactionManager"/>
+
+
+=====事务rollbackFor
+在Service上面加@Transactional的话，一般如果遇到异常就会回滚，业务不会被执行
+throw new RuntimeException("test");  类似这种异常就回滚
+Exception这种异常不会滚，需要加下面的
+在方法上面加@Transactional（rollbackFor=Exception.class）加这个的话就是遇到Exception异常也回滚
+
+
+====事务传播属性propagation
+有的方法不需要事务，如查询
+@Transactional（propagation=Propagation.NOT_SUPPORTED）这个表示没有事务
+默认
+@Transactional（propagation=Propagation.REQUIRED）这个是默认的，有事务
+
+
+
+====事务隔离级别isolation
+@Transactional（isolation） 

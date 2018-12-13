@@ -1,0 +1,74 @@
+
+
+
+好简单- -
+
+就右击数据库备份
+
+
+然后再需要安装的服务器上新建数据库
+右击恢复就行了
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+在postgresql的bin目录下打开cmd命令行
+D:\Program Files\PostgreSQL\9.5\bin
+
+
+----------------------导出数据库中指定的数据表
+pg_dump -h localhost -p 5432 -U postgres --column-inserts -t daxing_treespecies（这个是数据表名称） -f d://daxing_treespecies.sql postgis（这个是数据库名称）
+
+
+
+pg_dump -h localhost -p 5432 -U postgres --column-inserts -t daxing_growingpotential -f d://daxing_growingpotential.sql postgis
+pg_dump -h localhost -p 5432 -U postgres --column-inserts -t daxing_new -f d://daxing_new.sql postgis
+pg_dump -h localhost -p 5432 -U postgres --column-inserts -t daxing_treespecies -f d://daxing_treespecies.sql postgis
+pg_dump -h localhost -p 5432 -U postgres --column-inserts -t treepro_tempzone_first -f d://treepro_tempzone_first.sql postgis
+
+
+
+pg_dump -h localhost -p 5432 -U postgres --column-inserts -t daxing_shiro_role -f d://daxing_shiro_role.sql postgis
+
+pg_dump -h localhost -p 5432 -U postgres --column-inserts -t daxing_shiro_role_permission -f d://daxing_shiro_role_permission.sql postgis
+
+pg_dump -h localhost -p 5432 -U postgres --column-inserts -t daxing_shiro_role_user -f d://daxing_shiro_role_user.sql postgis
+
+pg_dump -h localhost -p 5432 -U postgres --column-inserts -t daxing_shiro_user -f d://daxing_shiro_user.sql postgis
+
+pg_dump -h localhost -p 5432 -U postgres --column-inserts -t daxing_shiro_permission -f d://daxing_shiro_permission.sql postgis
+
+
+
+
+----------------------导出整个数据库（windows这个怎么用不成，windows上用备份好用）
+pg_dump -h localhost -U postgres postgis   > d://sql文件名.sql
+
+
+----------------------导入整个数据库（在linux上这个可以成功）
+（执行  psql -d 数据库名 -h ip地址 -p 数据库端口 -U 用户名 -f 文件地址）
+psql -d 数据库名称 -h localhost -p 5432 -U postgres -f sql文件地址

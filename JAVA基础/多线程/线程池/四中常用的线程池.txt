@@ -1,0 +1,33 @@
+Executor封装好了四种线程池类型
+
+线程池（会用到队列）
+下面四种都是用ThreadPoolExecutor()构造函数形成的，参数不同
+
+
+newCachedThreadPool创建一个可缓存的线程池，线程池长度超过处理需要，可以灵活回收空闲线程，若不可回收，则新建线程
+
+newFixedThreadPool创建一个定长线程池，可控制线程最大并发数，超过的线程会在队列中等待
+
+newScheduledThreadPool创建一个定长线程池，支持定时及周期性任务执行
+
+newSingleThreadExecutor创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定的顺序执行
+
+1.newCachedThreadPool创建例子
+ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
+newCachedThreadPool.execute(new Runnable(){
+public void run(){
+    ......
+}
+});
+
+newCachedThreadPool.execute(new Runnable(){
+public void run(){
+    ......
+}
+});
+这里可以打开多个线程
+2.newFixedThreadPool创建例子
+ExecutorService newCachedThreadPool = Executors.newFixedThreadPool();
+执行也是execute方法
+3执行方法是schedule(线程，时间，时间单位)
+4用的不多，是单线程

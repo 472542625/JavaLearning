@@ -1,0 +1,12 @@
+<!-- 注解事务 -->
+	  <tx:annotation-driven transaction-manager="DataSourceTransactionManager" 
+		/>  
+
+
+
+
+@Transactional(rollbackFor = { Exception.class })  
+public void test() throws Exception {  
+     doDbStuff1();  
+     doDbStuff2();//假如这个操作数据库的方法会抛出异常，现在方法doDbStuff1()对数据库的操作   会回滚。  
+}  

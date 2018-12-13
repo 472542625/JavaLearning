@@ -1,0 +1,8 @@
+wkt（gis的一种文本标记语言）的表现形式是以如Point（10 20） LineString（10 20,20 30）这种的
+1.st_astext(geom)实现geometry转为wkt
+st_geomfromtext(wkt,wkid)实现wkt到geometry的转换
+
+
+2.常见的空间关系（Geometry Relationships）包括：相等(Equals)：几何形状拓扑上相等。脱节(Disjoint)：几何形状没有共有的点。相交(Intersects)：几何形状至少有一个共有点（区别于脱节）接触(Touches)：几何形状有至少一个公共的边界点，但是没有内部点。交叉(Crosses)：几何形状共享一些但不是所有的内部点。内含(Within)：几何形状A的线都在几何形状B内部。包含(Contains)：几何形状B的线都在几何形状A内部（区别于内含）重叠(Overlaps)：几何形状共享一部分但不是所有的公共点，而且相交处有他们自己相同的区域。
+
+3.常见的空间操作（Geometry Operations）包括：缓冲区：st_buffer(geom,distance)或者st_buffer(wkt,distance) 相交计算：st_intersection(geom,geom)或者st_intersection(wkt,wkt)合并计算：st_union(geom,geom,…)或者st_union(wkt,wkt,…)差异计算：st_difference(geom,geom)或者st_difference(wkt,wkt)对称差异分析： st_symdifference(geom,geom)

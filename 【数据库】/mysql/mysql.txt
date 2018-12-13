@@ -1,0 +1,4 @@
+登录mysql-hlocalhost -uroot -p123456;
+show databases显示所有数据库
+use table进入某个表
+truncate table清空某表

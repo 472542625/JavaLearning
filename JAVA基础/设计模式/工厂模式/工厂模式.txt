@@ -1,0 +1,50 @@
+https://www.jianshu.com/p/b9e4c5c3c565
+1111简单工厂（扩展需要改动工厂类的判断条件）
+就是A、B、C类继承了接口I
+public class ShapeFactory {
+    
+  
+  public static final String CIRCLE = "circle";
+    
+  public static final String RECTANGLE = "rectangle";
+   
+  public static final String TRIANGLE = "triangle";
+
+    
+public static Shape create(String name) {
+        
+Shape shape = null;
+        
+if (name == null)
+
+throw new NullPointerException();
+
+ 
+       
+if (name.equals("circle")) 
+{
+shape = new Circle();                       
+} 
+else if (name.equals("rectangle")) 
+{
+            shape = new Rectangle();
+        } 
+else if (name.equals("triangle"))
+{
+            shape = new Triangle();
+        } 
+       
+
+ return shape;
+    }
+
+
+}
+
+
+
+2222工厂方法（改进工厂类的判断条件）
+上面简单工厂是所有产品对应一个工厂，这个工厂方法是一个产品对应一个工厂，这些工厂继承自总工厂
+
+
+33333抽象工厂

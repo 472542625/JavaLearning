@@ -1,0 +1,6 @@
+<insert id="insert" parameterType="Person" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into person(name,pswd) values(#{name},#{pswd})
+</insert>　
+
+
+插入后参数Person实体中的id值被赋值生成的id值

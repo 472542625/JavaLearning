@@ -1,0 +1,36 @@
+https://blog.csdn.net/justloveyou_/article/details/72466416
+这个博文讲的很清楚
+
+1. new
+2.class.forName("全类名").newInstance();
+3.class.forName("全类名").getConstructor(里面是构造函数参数类型)
+4.Clone
+5.implements Serializable
+ 
+
+
+对象初始化的时候有三个初始化对象，分别是实例变量初始化、实例代码块初始化、构造函数初始化（最后执行）
+
+
+类的实例化是指创建一个类的实例(对象)的过程；
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+要想创建一个类的实例（对象），必须先将该类加载到内存并进行初始化

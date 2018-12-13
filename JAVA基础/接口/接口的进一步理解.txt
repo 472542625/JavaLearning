@@ -1,0 +1,5 @@
+vc这个对象可以随时切换他的类别
+VideoCard vc=new Elsa();
+VideoCard vc=new Colourful();
+比如Elsa类和Colourful类继承了VideoCard接口的A方法
+如果VideoCard vc=new Elsa();vc使用的A方法和VideoCard vc=new Colourful();此时vc的A方法不一样，这就是我理解的多态

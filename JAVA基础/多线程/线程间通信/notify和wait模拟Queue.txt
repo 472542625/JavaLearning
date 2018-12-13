@@ -1,0 +1,110 @@
+BlockingQueue是一个支持阻塞的队列
+put放入，如果BlockingQueue没有空间，则调用此方法的线程被阻断，直到有空间
+take取走，如果BlockingQueue为空，阻断进入等待状态直到有新数据放入
+
+import java.util.LinkedList;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class Myqueue {
+
+	private final int MinSize = 0;
+	private final int MaxSize;
+
+	private final LinkedList<Object> list = new LinkedList<Object>();
+	private final AtomicInteger count = new AtomicInteger();
+
+	public Myqueue(int size) {
+
+		this.MaxSize = size;
+	}
+
+	private final Object lock = new Object();
+
+	public void put(Object obj) {
+
+		synchronized (lock) {
+			while (count.get() == this.MaxSize) {
+				try {
+					lock.wait();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			list.add(obj);
+			count.incrementAndGet();
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("新加入的元素为:" + obj);
+			lock.notify();
+		}
+	}
+
+	public Object take() {
+		Object obj = null;
+		synchronized (lock) {
+
+			while (count.get() == this.MinSize) {
+				try {
+					lock.wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			obj = list.removeFirst();
+			count.decrementAndGet();
+			lock.notify();
+		}
+		return obj;
+	}
+
+	public int getSize() {
+
+		return this.count.get();
+	}
+
+	public static void main(String[] args) {
+		final Myqueue mq = new Myqueue(5);
+		mq.put("a");
+		mq.put("b");
+		mq.put("c");
+		mq.put("d");
+		mq.put("e");
+		System.out.println("当前容器的长度为" + mq.getSize());
+		Thread t1 = new Thread(new Runnable() {
+
+			public void run() {
+				// TODO Auto-generated method stub
+				mq.put("f");
+				mq.put("g");
+			}
+		});
+
+		t1.start();
+
+		Thread t2 = new Thread(new Runnable() {
+
+			public void run() {
+
+				Object obj1 = mq.take();
+				System.out.println("移除的元素为：" + obj1);
+				Object obj2 = mq.take();
+				System.out.println("移除的元素为：" + obj2);
+
+			}
+		});
+		t2.start();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
+
+

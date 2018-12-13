@@ -1,0 +1,79 @@
+第一节
+@Component
+@Aspect
+public class ComputerAspect{
+    @Before("excution(public int com.spring.aop.ComputerImpl1.add(int,int))")
+    public void a(){
+       ...调用add前
+    }
+    @After("excution(public int com.spring.aop.ComputerImpl1.add(int,int))")
+    public void b(){
+       ...调用add后
+    }
+}
+
+@Component
+public class ComputerImpl1{ 
+   public int add(int a,int b){
+     ...
+   }
+   public int sub(int a,int b){
+     ...
+   }
+}
+配置文件xml
+<aop:aspectj-autoproxy></aop:aspectj-autoproxy>使得Aspect注解的类生效
+
+
+
+
+
+https://ke.qq.com/webcourse/index.html#course_id=280229&term_id=100331903&taid=1928285697361573&vid=s14153zi6kt
+第二节 修改节点表达式，使得通用
+@Before("excution(public int com.spring.aop.ComputerImpl.add(int,int))")修改如下
+@Before("excution(public int com.spring.aop.ComputerImpl.*(..))")，这个不限定方法名，参数也不限制
+修改为@Before("excution(public * com.spring.aop.ComputerImpl.*(..))")，这个加了不限定返回值
+修改为@Before("excution(public * com.spring.aop.ComputerImpl..*(..))")，这个加了..意思ComputerImpl包下或者其子包下的所有方法
+还有JoinPoint参数访问连接点的细节，具体看第九分钟
+
+ 
+
+
+第三节通知类型
+@Before
+@After
+
+
+
+
+第四节 xml文件方式配置
+
+之前是利用上面的形式，利用@component来配置
+感觉xml文件配置复杂了，主要关注下数据库事务管理https://ke.qq.com/webcourse/index.html#course_id=280229&term_id=100331903&taid=1928302877230757&vid=n1415trnl0x
+
+ 
+		<bean id="ComputerAspect" class="ComputerAspect的路径"></bean>
+		<aop:config>
+                <aop:aspect   id="aspect" ref="ComputerAspect" />
+                <aop:before method="前置方法名" pointcut="excution(public int com.spring.aop.ComputerImpl.add(int,int))"/>
+                <aop:after method="后置方法名" pointcut="excution(public int com.spring.aop.ComputerImpl.add(int,int))"/>  
+                <aop:around method="环绕方法名" pointcut="excution(public int com.spring.aop.ComputerImpl.add(int,int))"/> 
+                <aop:after-throwing method="异常方法名" pointcut="excution(public int com.spring.aop.ComputerImpl.add(int,int))"/> 
+                </aop:aspect>
+		</aop:config> 
+
+
+可以使用重用的切点表达式
+              <aop:pointcut expression="excution(public int com.spring.aop.ComputerImpl.add(int,int))"  id="重用的切点表达式"/>
+然后上面的就可以改为：
+                <bean id="ComputerAspect" class="..."></bean>
+                <aop:config>
+                <aop:aspect   id="aspect" ref="ComputerAspect" />
+                <aop:before method="a"  pointcut-ref="重用的切点表达式"/> 
+                <aop:after method="a" pointcut="excution(public int com.spring.aop.ComputerImpl.add(int,int))"/>  
+                <aop:around method="a" pointcut="excution(public int com.spring.aop.ComputerImpl.add(int,int))"/> 
+                <aop:after-throwing method="a" pointcut="excution(public int com.spring.aop.ComputerImpl.add(int,int))"/> 
+                </aop:aspect>
+		</aop:config> 
+这里如果<aop:pointcut..../>放在 <aop:config>外面的话，所有都可以用，放在里面的话只有里面的可以用
+		 

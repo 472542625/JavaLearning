@@ -1,0 +1,19 @@
+构造方法注入： 
+ <bean id="UserServiceImpl" class="com.demo.impl.UserServiceImpl">
+ <constructor-arg>
+ <ref bean="userDao" />
+ </constructor-arg>
+ </bean>
+<bean id="userDao" class="com.demo.dao.UserDao" />
+
+
+setter注入：
+<bean id="UserServiceImpl" class="com.demo.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"/></bean>
+<bean id="userDao" class="com.demo.dao.UserDao"/>
+
+
+
+
+
+一般项目中用Autowire注解

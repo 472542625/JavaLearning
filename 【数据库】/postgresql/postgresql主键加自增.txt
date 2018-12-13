@@ -1,0 +1,7 @@
+create sequence event_id_seq
+start with 1
+increment by 1
+no minvalue
+no maxvalue
+cache 1;
+alter table daxing_user alter column uid set default nextval('event_id_seq');

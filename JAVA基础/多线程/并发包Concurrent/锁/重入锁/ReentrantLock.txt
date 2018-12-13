@@ -1,0 +1,75 @@
+重入锁，在需要进行同步的代码部分加上锁定，但不要忘记最后一定要释放锁定，不然会造成锁永远无法释放，其他线程永远进不来的结果
+
+  
+
+
+package testThread;
+
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class Locktest {
+
+	Lock lock = new ReentrantLock();
+	Condition condition = lock.newCondition();
+
+	void method1() {
+
+		try {
+			lock.lock();
+			System.out.println("当前线程:" + Thread.currentThread().getName()
+					+ "进入等待状态...");
+			Thread.sleep(3000);
+			System.out.println("当前线程:" + Thread.currentThread().getName()
+					+ "释放锁...");
+			condition.await();// /类似object的wait，释放锁lock
+			System.out.println("当前线程:" + Thread.currentThread().getName()
+					+ "继续执行...");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	void method2() {
+
+		try {
+			lock.lock();
+			System.out.println("当前线程:" + Thread.currentThread().getName()
+					+ "进入...");
+			Thread.sleep(3000);
+			System.out.println("当前线程:" + Thread.currentThread().getName()
+					+ "发出唤醒");
+			condition.signal();// /类似object的notify，不释放锁，通知t1线程继续执行接下来的代码
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	public static void main(String[] args) {
+		final Locktest uc = new Locktest();
+		Thread t1 = new Thread(new Runnable() {
+
+			public void run() {
+				uc.method1();
+			}
+		}, "t1");
+
+		Thread t2 = new Thread(new Runnable() {
+
+			public void run() {
+				uc.method2();
+			}
+		}, "t2");
+
+		t1.start();
+		t2.start();
+
+	}
+
+}

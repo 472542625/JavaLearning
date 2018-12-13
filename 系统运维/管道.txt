@@ -1,0 +1,6 @@
+ps -aux|grep tomcat
+
+ps -aux这个命令是查出所有进程运行信息
+grep tomcat是查出还有tomcat的信息
+
+|，左边的输出作为右边的输入 

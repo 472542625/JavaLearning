@@ -1,0 +1,95 @@
+传统的IO socket编程  
+public class testSocket {
+
+	public static void main(String[] args) throws IOException {
+		ServerSocket server = new ServerSocket(7777);
+		System.out.println("服务端开启了...");
+		while (true) {
+			Socket socket = server.accept();
+			System.out.println("有新客户端连接上来了...");
+
+			InputStream is = socket.getInputStream();
+			byte[] data = new byte[1024];
+			while (true) {
+
+				int len = is.read(data);
+				if (-1 != len) {
+					String info = new String(data, 0, len, "GBK");
+					System.out.println(info);
+				} else {
+					break;
+				}
+			}
+		}
+
+	}
+}
+
+
+同时开两个
+telnet localhost7777
+ctrl+]
+发现只能有一个可以连接
+
+
+
+
+
+
+
+
+
+
+
+改为多线程
+代码如下
+public class testSocket {
+
+	public static void main(String[] args) throws IOException {
+
+		ExecutorService threadpool = Executors.newCachedThreadPool();
+
+		ServerSocket server = new ServerSocket(7777);
+		System.out.println("服务端开启了...");
+		while (true) {
+			final Socket socket = server.accept();
+
+			threadpool.execute(new Runnable() {
+
+				public void run() {
+					System.out.println("有新客户端连接上来了...");
+
+					try {
+						InputStream is = socket.getInputStream();
+						byte[] data = new byte[1024];
+						while (true) {
+
+							int len = is.read(data);
+							if (-1 != len) {
+								String info = new String(data, 0, len, "GBK");
+								System.out.println(info);
+							} else {
+								break;
+							}
+						}
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+
+				}
+
+			});
+
+		}
+
+	}
+}
+
+
+上面弊端是每一个请求开一个线程，非常耗费内存
+
+
+
+
+
+

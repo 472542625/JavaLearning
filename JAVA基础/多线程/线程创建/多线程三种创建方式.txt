@@ -1,0 +1,14 @@
+https://ke.qq.com/webcourse/index.html#course_id=62464&term_id=100200460&taid=1003922835698688&vid=c14009l6ou1
+
+
+正常是main方法起步，线程体是从重写的run方法起步的
+1 继承Thread实现多线程
+1）、继承Thread，重写run方法
+2）、创建类对象，调用对象的start方法
+2 继承Runnable接口，使用静态代理的方式
+1）创建真实角色类，继承Runnable接口，override重写run方法
+2）创建代理角色Thread proxy = new Thread(继承了Runnable的角色类)，proxy.start()
+这两个还是继承Runnable接口，因为实现的接口还可以继续继承，继承了类的话就不能再继承
+ 
+
+ 

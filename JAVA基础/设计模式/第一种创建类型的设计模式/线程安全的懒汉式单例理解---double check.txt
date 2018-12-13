@@ -1,0 +1,86 @@
+线程安全的懒汉式单例理解
+https://blog.csdn.net/cselmu9/article/details/51366946
+
+
+
+
+public class JVM{
+    private static JVM instance = null;
+    private Singleton(){}
+    public static JVM newInstance(){
+        if(null == instance){
+            instance = new JVM();
+        }
+        return instance;
+    }
+}
+单线程创建
+JVM jvm1 = JVM.newInstance();
+JVM jvm2 = JVM.newInstance();
+这两个地址一样
+
+多线程创建
+class JVM1 implements Runnable{
+void run(){
+system.out.println(JVM.newInstance());
+}
+} 
+class JVM2 implements Runnable{
+void run(){
+system.out.println(JVM.newInstance());
+}
+} 
+JVM1 jvm1 = new JVM1();
+JVM2 jvm2 = new JVM2();
+Thread t1 = new Thread(jvm1);
+t1.start();
+Thread t2 = new Thread(jvm2);
+t2.start();
+得出地址不一样
+如果单例类的方法加synchronized
+public class JVM{
+    private static JVM instance = null;
+    private Singleton(){}
+    public static synchronized JVM newInstance(){
+        if(null == instance){
+            instance = new JVM();
+        }
+        return instance;
+    }
+}
+或者同步块
+public class JVM{
+    private static JVM instance = null;
+    private Singleton(){}
+
+    public static JVM newInstance()
+         synchronized(JVM.class){
+        if(null == instance){
+            instance = new JVM();
+        }
+        return instance;
+        }
+    }
+}
+则创建的地址一致
+
+
+再改进就是推荐使用的（ Double Check Locking 双检查锁机制（推荐））
+public class JVM{
+    private static JVM instance = null;
+    private Singleton(){}
+
+    public static JVM newInstance()
+    
+///比如两个线程，A进来的时候是空的则创建，B进来的时候不为空，直接返回已经创建好的对象
+    if(null == instance){
+         synchronized(JVM.class){
+        if(null == instance){///如果AB都进，结果A进来了，B阻塞，等A执行完了以后，B就会继续执行，所以这里还需要判断是否为空
+            instance = new JVM();
+        }
+        
+        }
+     }
+     }
+     return instance;
+}

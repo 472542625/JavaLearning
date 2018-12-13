@@ -1,0 +1,4 @@
+Component不清楚的时候可以都用这个，JEE的
+Controller  springmvc的
+Service springmvc的
+Repository springmvc的

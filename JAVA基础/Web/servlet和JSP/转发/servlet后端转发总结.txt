@@ -1,0 +1,8 @@
+转发的路径必须是绝对路径
+如 <script src="http://localhost:8085/yl/Build/Cesium/Cesium.js"></script>
+
+
+
+转发
+request.getRequestDispatcher("list.jsp").forward(request, response);第一种
+this.getServletContext().getRequestDispatcher("list.jsp").forward(request, response);第二种不建议使用，以后用第一种就行了

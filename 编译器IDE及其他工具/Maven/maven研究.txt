@@ -1,0 +1,14 @@
+myecplise
+maven-archetype-quickstart快速构建项目框架
+
+自己手动加自己的jar包，在pom.xml的<dependencies></dependencies>里面加这个
+在postgis mvn库上得到 
+<dependency>
+<groupId>org.postgis</groupId>
+<artifactId>postgis-driver</artifactId>
+<version>1.0</version>
+</dependency>
+<!--org.postgis表示包名（两层文件夹）-->
+<!--postgis-driver倒数第二文件夹-->
+<!--1.0倒数第1文件夹-->
+ 

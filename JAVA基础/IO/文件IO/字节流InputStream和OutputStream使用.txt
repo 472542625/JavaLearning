@@ -1,0 +1,49 @@
+*--------下面是字节流的实现，字符流类似
+从文件中读取
+1首先建立联系File file = new File("D://1.txt");
+2选择流 InputStream FileInputStream
+3操作 byte[] = new byte[1024] 
+4释放资源 +close()
+File file = new File("D://1.txt");
+InputStream is = new FileInputStream(file);
+byte[] car = new  byte[10];
+int len =0;
+while(-1!=(len=is.read(car))){    ///从此输入流中将最多 car.length 个字节的数据读入一个 byte 数组中，读入缓冲区的字节总数，如果因为已经到达文件末尾而没有更多的数据，则返回 -1
+String info  = new String(car,0,len);
+System.out.println(info);
+}
+is.close();
+
+
+
+
+写入到文件中
+1首先建立联系File file = new File("D://1.txt");
+2选择流 OutputStream FileOutputStream
+3操作 write() +flush()
+4释放资源 +close()
+File file = new File("D://1.txt");
+OutputStream  os = new FileOutputStream(file ,true);
+String str ="12121";
+byte [] data = str.getBytes();
+os.write(data,0,data.length);
+os.flush();
+os.close();
+
+
+
+
+拷贝
+File outfile = new File("D://out.txt");
+File inputfile = new File("D://input.txt");
+InputStream os = new FileInputStream(inputfile );
+OutputStream  os = new FileOutputStream(outfile ,true);
+
+byte[] car= new byte[1024];
+int len = 0;
+while(-1!=(len=is.read(car))){ 
+   os.write(car,0,len);
+}
+os.flush();
+os.close();
+is.close();

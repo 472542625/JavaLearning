@@ -1,0 +1,2 @@
+httpResponse.sendRedirect(httpRequest.getContextPath()+"/page/login/login.jsp");
+这种重定向得到的最终路径是绝对路径localhost:8085/ssmdemo/page/login/login.jsp

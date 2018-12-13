@@ -1,0 +1,4 @@
+Myeclipse的使用方法-查找类文件（Open Type）
+博客分类： My Eclipse的使用方法
+MyeclipseJDK 
+要快速找到某个类型的定义，选择菜单Navigate > Open Type，或者按下Ctrl+Shift+T键，这时候可以出现Open Type 对话框，在Enter type name prefix or pattern 输入框中键入类的头几个字母，或者也可以使用?和*这样的通配符来模糊查找，对话框下面的列表中将会显示匹配的类文件，选中列表中显示的单个或者多个类定义来打开它。如果这个类关联了源码（例如JDK 里面的类），就可以看到源代码，否则只能看到类的方法和成员信息。如下图所示： 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		  http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<context:component-scan base-package="com.lt.aop"></context:component-scan>
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+	<bean id="comboPooledDataSourceID" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl"
+			value="jdbc:mysql://localhost:3306/testdb?characterEncoding=UTF-8" />
+		<property name="user" value="root" />
+		<property name="password" value="123456" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="500" />
+		<property name="initialPoolSize" value="10" />
+	</bean>
+
+
+
+
+	<bean id="sqlSessionFactoryBeanID" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--  <property name="configLocation" value="classpath:mybatis.xml" />-->
+		<property name="dataSource" ref="comboPooledDataSourceID" />
+		<!--<property name="mapperLocations" value="classpath:com/ssmcrud/web/login/dao/*.xml" 
+			/> <property name="mapperLocations" value="classpath:com/ssmcrud/web/spdatamanage/dao/*.xml" 
+			/> -->
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:com/lt/aop/dao/*.xml</value>
+			</list>
+		</property>
+	</bean>
+
+
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.lt.*.dao" />
+
+	</bean>
+
+
+	<bean id="DataSourceTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="comboPooledDataSourceID"></property>
+	</bean>
+
+	<!-- 注解事务 -->
+
+	<tx:annotation-driven transaction-manager="DataSourceTransactionManager" />
+</beans>

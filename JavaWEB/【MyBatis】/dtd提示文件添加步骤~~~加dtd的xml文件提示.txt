@@ -1,0 +1,9 @@
+window
+-preference
+- ‰»Îxml
+-xml catalog
+-user specified entries
+-add
+-key ‰»Î°∞http://mybatis.org/dtd/mybatis-3-mapper.dtd°±
+-key id —°‘ÒURL
+-OK

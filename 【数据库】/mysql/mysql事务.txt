@@ -1,0 +1,24 @@
+start transtraction 或者begin开启事务
+
+insert into testtable(value1,value2) values(x1,x2)
+...
+
+这个时候如果打开另一连接看的话数据是没有插入的，只有本连接更新了
+
+下面有两种情况
+一、commit提交事务的话直接提交了不可恢复
+
+
+
+二、如果是rollback的话回滚事务，之前的都不做数1
+
+
+
+
+
+
+
+
+
+
+参考博客https://blog.csdn.net/mevicky/article/details/50332443

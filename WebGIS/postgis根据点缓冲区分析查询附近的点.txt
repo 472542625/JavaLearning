@@ -1,0 +1,113 @@
+select geom from bj_yj_wz
+
+
+查询该点是否包含在缓冲区中
+select st_contains(st_buffer('POINT(12957113.399200564 4858670.793459995)',10),st_geometryfromtext('POINT(12957113.399200564 4858670.793459995)'))
+
+缓冲区分析
+st_buffer('POINT(12957113.399200564 4858670.793459995)',10)
+
+转坐标系为3857
+select st_astext(st_transform(st_geometryfromtext('POINT(116.39573004571712 39.94994297735869)',4326),3857));
+
+
+
+select st_contains
+
+(st_buffer('POINT(12957113.399200564 4858670.793459995)',10),
+
+st_geometryfromtext
+   (st_astext
+            (st_transform
+                       (st_geometryfromtext('POINT(116.39573004571712 39.94994297735869)',4326),3857)
+            )
+   )
+)
+
+
+select st_contains
+
+(st_buffer('POINT(12957113.399200564 4858670.793459995)',10),
+
+st_geometryfromtext
+   (st_astext
+            (st_transform
+                       (st_geometryfromtext(st_astext(geom),4326),3857)
+            )
+   )
+) from bj_yj_wz 
+
+"POINT(12955428.3089199 4859846.77590389)"
+"POINT(12957812.2324077 4853671.72943026)"
+"POINT(12958209.552989 4848406.53884453)"
+"POINT(12961553.6678815 4847931.94551172)"
+
+"POINT(116.380592622175 39.9580409438934)"
+
+
+select st_contains
+
+(st_buffer( (st_astext
+            (st_transform
+                       (st_geometryfromtext('POINT(116.39573004571712 39.94994297735869)',4326),3857)
+            )
+   ),10),
+
+st_geometryfromtext
+   (st_astext
+            (st_transform
+                       (st_geometryfromtext(st_astext(geom),4326),3857)
+            )
+   )
+) from bj_yj_wz
+
+
+
+
+
+
+
+
+最终版本  根据点缓冲区分析查询附近的点，并求出其距离
+select   gid,name,st_astext(geom) as geom,ST_Distance as distance from
+		(select gid,name,geom ,st_contains
+
+		(st_buffer( (st_astext
+		(st_transform
+		(st_geometryfromtext((select st_astext(geom) from bj_yj_jkd where gid =6 ),4326),3857)
+		)
+		),90000),
+
+		st_geometryfromtext
+		(st_astext
+		(st_transform
+		(st_geometryfromtext(st_astext(geom),4326),3857)
+		)
+		)
+		),
+
+		ST_Distance(
+
+
+		(st_transform
+		(st_geometryfromtext(( st_astext(geom) ),4326),3857)
+		)
+		,(select (st_transform
+		(st_geometryfromtext(( st_astext(geom) ),4326),3857)
+		) from bj_yj_jkd where gid=6)) 
+		from bj_yj_wz)
+
+
+
+
+		 as a where st_contains = 't'
+
+
+
+
+
+
+
+
+
+

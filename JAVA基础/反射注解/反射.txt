@@ -1,0 +1,27 @@
+获取类
+Class cls = Class.forName("com.test.user");
+还有两种方式创建
+
+获取属性
+Filed[] fileds = cls.getDeclaredFileds();获取所有的属性
+Filed filed = cls.getDeclareFiled("某个属性名称");获取指定属性
+
+获取方法
+Method method =cls.getDeclaredMethod("某个方法名称"，（参数类型）String.class)
+
+获取构造函数
+Construtor[] constructors =cls.cls.getDeclaredConstrutors();所有构造函数
+Construtor constructors =cls.cls.getDeclaredConstrutor(null);指定得到无参数构造函数
+Construtor constructors =cls.cls.getDeclaredConstrutor(String.class，int.class);指定得到有参数构造函数
+
+
+使用反射API创造实例
+User u = cls.newInstance();调用User的无参数构造器，也可以调用有参构造器
+使用反射API调用实例方法
+Method method =cls.getDeclaredMethod("某个方法名称",String.class);
+method.invoke(u,"参数名称");实现动态调用
+使用反射API调用实例属性
+Filed f =cls.getDeclareFiled("某个属性名称");
+f.setAccessible(ture);这个信息不做安全检查，可以访问私有属性
+f.set(u,"参数名");
+ 

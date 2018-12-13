@@ -1,0 +1,10 @@
+
+Response对象
+设置头信息response.setHeader("content-type", "text/html;charset=UTF-8");
+
+输出
+第一种输出response.getWriter().write("I am three");PrintWriter流
+( 注：PrintWriter out = response.getWriter();）
+第二种输出
+OutputStream outputStream = response.getOutputStream();
+outputStream.write("使用OutputStream流输出数字1：".getBytes("UTF-8"));

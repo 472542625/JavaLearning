@@ -1,0 +1,46 @@
+1、基本的获取方式
+在一个GetFeature请求中，需包含以下参数：1、service，服务请求方式，固定为wfs；2、request，请求方法，固定为GetFeature；3、version，版本，可选1.1.0、2.0.0等；4、typename，为你需要请求的图层名称。一个请求的URL中包含了以上参数的时候，会返回正确的值。
+示例url：
+http://localhost:8085/geoserver/climate/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=climate:temperature_asia1981
+返回的是kml格式的xml文档，具体见下
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml" xmlns:climate="http://geoserver.org/climate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://geoserver.org/climate http://localhost:8085/geoserver/climate/wfs?service=WFS&version=1.0.0&request=DescribeFeatureType&typeName=climate%3Atemperature_asia1981 http://www.opengis.net/wfs http://localhost:8085/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+<gml:boundedBy>
+<gml:null>unknown</gml:null>
+</gml:boundedBy>
+
+
+<gml:featureMember>
+<climate:temperature_asia1981 fid="temperature_asia1981.1">
+<climate:the_geom>
+<gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+<gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">88.633,30.95</gml:coordinates>
+</gml:Point>
+</climate:the_geom>
+<climate:STATION>CHM00055472</climate:STATION>
+<climate:NAME>XAINZA, CH</climate:NAME>
+<climate:纬度>30.95</climate:纬度>
+<climate:经度>88.633</climate:经度>
+<climate:海拔>4670.0</climate:海拔>
+<climate:日期>1981-01-01T00:00:00</climate:日期>
+<climate:极端最高温>0.0</climate:极端最高温>
+<climate:极端最低温>32.0</climate:极端最低温>
+<climate:平均温度>0.0</climate:平均温度>
+<climate:最高温度>22.7</climate:最高温度>
+<climate:最低温度>0.0</climate:最低温度>
+</climate:temperature_asia1981>
+</gml:featureMember>
+
+.....
+</wfs:FeatureCollection>
+
+
+
+
+2.geojson
+http://localhost:8085/geoserver/climate/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=climate:temperature_asia1981&maxFeatures=50&outputFormat=application%2Fjson
+
+
+3、属性查询
+在请求中，可通过cql_filter参数输入过滤条件，对图层进行查询，查询的格式可移步http://docs.geoserver.org/latest/en/user/tutorials/cql/cql_tutorial.html#cql-tutorial看看相关具体的说明，在此我简单的举两个例子来说明。
+示例URL：
+http://localhost:8088/geoserver/lzugis/wfs?service=WFS&request=GetFeature&version=1.1.0&typename=capital&outputFormat=json&cql_filter=name='兰州'

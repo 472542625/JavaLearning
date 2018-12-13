@@ -1,0 +1,71 @@
+https://ke.qq.com/webcourse/index.html#course_id=62476&term_id=100200181&taid=997158262207500&vid=n1400pwct1m
+
+·····单例模式https://blog.csdn.net/goodlixueyong/article/details/51935526
+懒汉
+public class Singleton{
+    private static Singleton instance = null;
+    private Singleton(){}
+    public static Singleton newInstance(){
+        if(null == instance){
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+
+
+
+
+
+
+饿汉
+public class Singleton{
+    private static Singleton instance = new Singleton();
+    private Singleton(){}
+    public static Singleton newInstance(){
+        return instance;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+·····适配器模式https://www.cnblogs.com/V1haoge/p/6479118.html
+我的理解就是一个类继承了A接口后，想实现B接口中的方法，利用转接头就是适配器
+ public interface Ps2 {
+     void isPs2();
+ }
+ public interface Usb {
+     void isUsb();
+ }
+public class Usber implements Usb {
+
+    @Override
+    public void isUsb() {
+        System.out.println("USB口");
+    }
+
+}
+public class Adapter extends Usber implements Ps2 {
+
+    @Override
+    public void isPs2() {
+        isUsb();
+    }
+
+}
+public class Clienter {
+
+    public static void main(String[] args) {
+        Ps2 p = new Adapter();
+        p.isPs2();
+    }
+
+}

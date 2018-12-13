@@ -1,0 +1,7 @@
+阻塞队列BlockingQeque
+生产者写入满的时候，就会进入到阻塞
+当队列为空的时候，消费者也会等待
+
+非阻塞队列
+ConcurrentLinkedQeque
+所以一般都用非阻塞式

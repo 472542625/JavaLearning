@@ -1,0 +1,71 @@
+手写事务太冗余，可以配合AOP实现声明式事务
+http://study.163.com/course/courseLearn.htm?courseId=1003740005#/learn/video?lessonId=1004455465&courseId=1003740005
+xml配置文件
+<!-- 配置事物 -->
+	<bean id="dataSourceTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+
+       <!-- Aop配置： 拦截哪些方法(切入点表表达式) + 应用上面的事务增强配置 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.itmayiedu02.service.UserService.add(..))"
+			id="pt" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pt" />
+	</aop:config>
+
+	
+	<tx:advice id="txAdvice" transaction-manager="dataSourceTransactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"   />///这个意思是以get开头的方法不拦截
+			<tx:method name="find*" read-only="true" />///这个意思是以find开头的方法不拦截
+			<tx:method name="*" read-only="false" />///其余的都拦截
+		</tx:attributes>
+	</tx:advice>
+	
+
+
+ 
+
+
+数据库访问层
+//userDao
+@Repository("userDao02")
+public class UserDao {
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	public void add() {
+		System.out.println("userDao002 add....");
+	}
+
+	public void add(String name, Integer age) {
+
+		System.out.println("userDao002 add.... name:" + name + ",age:" + age);
+		String sql = "INSERT INTO users(NAME, age) VALUES(?,?);";
+		int update = jdbcTemplate.update(sql, name, age);
+		System.out.println("insertResult:" + update);
+	}
+
+}
+
+服务层
+@Service
+public class UserService {
+
+	@Resource(name = "userDao02")
+	private UserDao userDao;
+	@Autowired
+	private TransactionUtils transactionUtils;	 	 
+	public void add() {
+		 
+	}
+}
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+进入项目的目录下面cmd命令
+
+jar 
+mvn package
+java - jar 包名 --server.port=8888
+
+
+
+war
+mvn package
+java - jar 包名

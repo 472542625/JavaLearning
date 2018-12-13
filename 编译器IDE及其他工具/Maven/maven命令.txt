@@ -1,0 +1,6 @@
+mvn compile是下载jar包到本地仓库等
+mvn clean是清除target
+mvn package 打包
+mvn install部署到本地仓库
+
+使用maven命令：mvn dependency:sources 下载依赖包的源代码。

@@ -1,0 +1,84 @@
+不使用 /* 拦截所有，拦截想拦截的就可以了 
+类似下面的过滤方式 
+<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.usl</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.view</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/jaxrs/*</url-pattern>
+	</filter-mapping>
+在filter类中判断一下，如果是.html结尾的就不过滤。
+         HttpServletRequest req = (HttpServletRequest)request; 
+        //由于web.xml中设置Filter过滤全部请求，可以排除不需要过滤的url 
+        String reqURI = req.getRequestURI(); 
+        if(reqURI.endsWith(".html")) chain.doFilter(request, response);
+         HttpServletRequest req = (HttpServletRequest)request; 
+        //由于web.xml中设置Filter过滤全部请求，可以排除不需要过滤的url 
+        String reqURI = req.getRequestURI(); 
+        if(reqURI.endsWith(".html")) chain.doFilter(request, response);
+chain是以下过滤方法中的chain吗？ 
+public void doFilter(ServletRequest request,  
+ServletResponse response,  
+FilterChain chain) throws IOException, ServletException{ 
+另外， if(reqURI.endsWith(".html")) 到底是 真还是假 
+         HttpServletRequest req = (HttpServletRequest)request; 
+        //由于web.xml中设置Filter过滤全部请求，可以排除不需要过滤的url 
+        String reqURI = req.getRequestURI(); 
+        if(reqURI.endsWith(".html")) chain.doFilter(request, response);
+chain是以下过滤方法中的chain吗？ 
+public void doFilter(ServletRequest request,  
+ServletResponse response,  
+FilterChain chain) throws IOException, ServletException{ 
+另外， if(reqURI.endsWith(".html")) 到底是 真还是假 
+就是这个chain，这个判断就是判断你放问的路径是否以.html结尾，你可以试试。
+HttpServletRequest req = (HttpServletRequest)request; 
+        //由于web.xml中设置Filter过滤全部请求，可以排除不需要过滤的url 
+        String reqURI = req.getRequestURI(); 
+        if(reqURI.endsWith(".html")) chain.doFilter(request, response);
+chain是以下过滤方法中的chain吗？ 
+public void doFilter(ServletRequest request,  
+ServletResponse response,  
+FilterChain chain) throws IOException, ServletException{ 
+另外， if(reqURI.endsWith(".html")) 到底是 真还是假 
+就是这个chain，这个判断就是判断你放问的路径是否以.html结尾，你可以试试。
+报错 
+java.lang.IllegalStateException: getWriter() has already been called for this response
+public void doFilter(ServletRequest request, ServletResponse response, 
+FilterChain chain) throws IOException, ServletException { 
+//把ServletRequest和ServletResponse转换成真正的类型 
+        HttpServletRequest req = (HttpServletRequest)request; 
+        String reqURI = req.getRequestURI(); 
+        if(reqURI.endsWith(".do")) chain.doFilter(request, response); 
+        System.out.println(reqURI); 
+        chain.doFilter(request, response); 
+} 
+我这里用过的原代码，没错，你看下你别的地方，用到response的地方
+//把ServletRequest转换成真正的类型 
+        HttpServletRequest req = (HttpServletRequest)request; 
+        String reqURI = req.getRequestURI(); 
+        if(reqURI.endsWith(".html")) chain.doFilter(request, response); 
+        else{ 
+         return; 
+        } 
+这个是我刚才测试了的，只有html结尾的可以过。

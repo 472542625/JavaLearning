@@ -1,0 +1,8 @@
+https://www.cnblogs.com/cythia/p/8495341.html
+
+
+npm install --save-dev webpack-cli  安装到本地文件夹
+
+
+	
+npm install webpack-cli -g  安装到全局

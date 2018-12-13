@@ -1,0 +1,21 @@
+前台
+<script type="text/javascript">
+       
+       $("#testa").click(function(){            
+         $.ajax({         
+          type:"get",
+          url:"${appPath}/testjsp/testmain",
+          success:function(data){ 
+         $("#main").html(data);     
+          }       
+       });     
+       });                   
+       </script>
+后台
+public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher("main.jsp").forward(request, response);
+
+	}
+上面这个返回的是一个完整的main.jsp
+然后$("#main").html(data); 意思是id为main的div被填充为main.jsp

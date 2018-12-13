@@ -1,0 +1,74 @@
+public class studentdao {
+
+	public static long strDate(String dateStr) {
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+		try {
+			return format.parse(dateStr).getTime();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+
+	}
+
+	public void addstudent() throws SQLException {
+
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn = (Connection) DriverManager
+					.getConnection("jdbc:mysql://localhost:3306/studenttest",
+							"root", "123456");
+			Date date = new Date(strDate("2015-4-10 10:10:10"));
+			Timestamp timestamp = new Timestamp(strDate("2015-4-10 10:10:10"));
+			String sql = "insert into student(name,age,studate,timestamp) values(?,?,?,?)";
+
+			PreparedStatement pstmt = (PreparedStatement) conn
+					.prepareStatement(sql);
+			pstmt.setObject(1, "tom1");
+			pstmt.setObject(2, "12");
+			pstmt.setObject(3, date);
+			pstmt.setObject(4, timestamp);
+			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+
+	}
+}
+
+
+
+
+还有一种Statement
+String sql = "select * from gjp_zhangwu";
+
+		Statement stmt = (Statement) Dbutil.getConnection().createStatement();
+
+		ResultSet result = stmt.executeQuery(sql);
+
+		return null;
+
+
+
+Statement和PreparedStatement的用法区别
+第一：
+prepareStatement会先初始化SQL，先把这个SQL提交到数据库中进行预处理，多次使用可提高效率。
+createStatement不会初始化，没有预处理，没次都是从0开始执行SQL
+
+第二：
+prepareStatement可以替换变量
+在SQL语句中可以包含?，可以用ps=conn.prepareStatement("select* from Cust where ID=?");
+int sid=1001;
+ps.setInt(1, sid);
+rs = ps.executeQuery();
+可以把?替换成变量。
+而Statement只能用
+int sid=1001;
+Statement stmt = conn.createStatement();
+ResultSet rs = stmt.executeQuery("select * from Cust where ID="+sid);
+来实现。

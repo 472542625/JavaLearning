@@ -1,0 +1,3 @@
+match "(properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,objectWrapperFactory?,plugins?,environments?,databaseIdProvider?,mappers?)".  
+
+∑Ò‘Ú±®¥Ìmybatis:"configuration" must match "(properties?,settings?,typeAliase.....

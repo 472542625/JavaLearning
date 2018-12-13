@@ -1,0 +1,1 @@
+parameterType=“XXXX”如果是类的话写类的全路径

@@ -1,0 +1,63 @@
+git初始化
+git init
+git config --global  user.name 'litao'
+git config --global  user.email '472542625@qq.com'
+
+
+
+git的增加与撤销等常规操作
+git add index.html  
+git add *.html（上传所有html文件）  
+git add .（上传所有文件）  
+git status
+git commit -m '第二次'
+git log显示日志列表
+git show xxxxx显示某个日志的详细信息
+
+
+
+新建删除分支
+git branch  xxx新建分支
+git checkout xxx转换分支
+git branch -d xxxx删除分支
+合并分支
+git checkout master
+git merge xxxx 分支和master合并
+合并冲突
+比如Master分支修改了a文件，commit到本地仓库，dev分支也修改的a文件，commit的时候会报错 
+  
+<<<<<<< HEAD
+Master修改的
+========
+dev修改的
+>>>>>>> dev
+然后你把这些全删除了，然后重新确认写一下再add、commit、删除分支
+
+
+推送到远端服务器
+git remote add origin http://47.92.32.93:8090/project/old-trees-management.git
+
+
+git remote remove origin取消关联
+git push origin master上传到远程服务器的master分支
+上面还可以这样写git push -u origin master:master指的是把本地的master分支提交到远程的master，如果只写一个的话也可以，等于master:master
+上面的orgin在.git的配置文件config里面写的是远程github的地址
+推送冲突解决
+比如A修改了a文件，推送到了服务器，B也修改的a文件，push的时候会报错，要求你先pull这个a文件到本地
+<<<<<head
+A修改的
+<<<<<
+B修改的
+然后你把这些全删除了，然后重新确认写一下再push
+
+
+
+克隆远端到本地
+git clone http://47.92.32.93:8090/project/old-trees-management.git
+git pull origin master拉取远程服务器与本地合并
+
+
+https://blog.csdn.net/sinat_31135199/article/details/52915973最好的博客流程文档
+
+
+ 

@@ -1,0 +1,8 @@
+在geoserver的web.xml里面加
+<context-param>
+       
+<param-name>GEOSERVER_DATA_DIR</param-name>
+       
+ <param-value>d:/data/data</param-value>
+/////你要放的geoserver的data目录
+    </context-param> 

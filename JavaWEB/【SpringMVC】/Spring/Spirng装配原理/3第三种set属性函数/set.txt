@@ -1,0 +1,33 @@
+Dao层
+pulbic class UserDao(){
+
+  public void save(){
+  System.out.println("UserDao.save()业务逻辑层save");
+ }
+
+}
+Service层
+public  class UserService(){
+
+  private UserDao userDao;
+  public void SetUserDao(UserDao userDao){
+     this.userDao=userDao;
+
+  }
+
+  public void save(){
+  System.out.println("UserService.save()业务逻辑层save");
+  userDao.save();
+  }
+}
+
+xml配置文件
+<bean id="userDao" class ="com.test.UserDao"></bean>
+<bean id="userService" class ="com.test.UserService">
+<property name="userDao" ref="userDao"></property>
+</bean>
+
+
+
+··记得这里是用SetUserDao的set方法作为注入的，这里不区分大小写，set方法名称可以是setuserdao也可以是setUserdao,其余的试了不行，就是第一个字母大小写无所谓，但是其余的必须一致
+··还有这里set方法和属性名称没关系

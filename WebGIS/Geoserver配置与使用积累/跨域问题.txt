@@ -1,0 +1,3 @@
+GeoServer配置CORS(跨域资源共享)(https://www.cnblogs.com/baobaodong/p/6768950.html)  
+ geoserver地图跨域解决方案(https://blog.csdn.net/longshengguoji/article/details/53352888) 
+  <filter-mapping>放于原有段后面。

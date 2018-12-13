@@ -1,0 +1,4 @@
+tomcat在发布项目的时候没有同时发布maven依赖所添加的jar包，所以找不到
+解决方法：设置一下eclipse：
+项目 — properties - Deployment Assembly - Add - Java Build Path Entries - 选择Maven Dependencies - Finish - OK
+把对应的Maven依赖包也发布到tomcat，调试时会自动把那些jar发布到指定目录下，tomcat也能找到那些jar了。

@@ -1,0 +1,127 @@
+（下面是个例子）
+@Target(value{ElementType.METHOD,ElementType.TYPE})表示可以放在方法和类前面修饰
+@Retention(RetentionPolicy.RUNTIME)表示在运行时候用，比如反射
+public @interface xxxxx{
+   String studentname() default "";
+ 
+}
+
+
+使用
+@xxxxx
+test{
+
+@xxxxx
+testmethod(){
+}
+
+}
+也可以
+@xxxxx(studentname="lt")
+test{
+
+@xxxxx
+testmethod(){
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+············注解的元注解
+
+@Retention
+Retention 的英文意为保留期的意思。当 @Retention 应用到一个注解上的时候，它解释说明了这个注解的的存活时间。
+
+它的取值如下： 
+- RetentionPolicy.SOURCE 注解只在源码阶段保留，在编译器进行编译时它将被丢弃忽视。 
+- RetentionPolicy.CLASS 注解只被保留到编译进行的时候，它并不会被加载到 JVM 中。 
+- RetentionPolicy.RUNTIME 注解可以保留到程序运行的时候，它会被加载进入到 JVM 中，所以在程序运行时可以获取到它们。
+@Retention(RetentionPolicy.RUNTIME)
+public @interface TestAnnotation {}
+
+
+
+@Documented
+顾名思义，这个元注解肯定是和文档有关。它的作用是能够将注解中的元素包含到 Javadoc 中去。
+
+
+
+@Target
+Target 是目标的意思，@Target 指定了注解运用的地方。
+你可以这样理解，当一个注解被 @Target 注解时，这个注解就被限定了运用的场景。
+类比到标签，原本标签是你想张贴到哪个地方就到哪个地方，但是因为 @Target 的存在，它张贴的地方就非常具体了，比如只能张贴到方法上、类上、方法参数上等等。@Target 有下面的取值
+ElementType.ANNOTATION_TYPE 可以给一个注解进行注解
+ElementType.CONSTRUCTOR 可以给构造方法进行注解
+ElementType.FIELD 可以给属性进行注解
+ElementType.LOCAL_VARIABLE 可以给局部变量进行注解
+ElementType.METHOD 可以给方法进行注解
+ElementType.PACKAGE 可以给一个包进行注解
+ElementType.PARAMETER 可以给一个方法内的参数进行注解
+ElementType.TYPE 可以给一个类型进行注解，比如类、接口、枚举
+
+
+
+
+
+··············注解的属性
+注解的属性也叫做成员变量。注解只有成员变量，没有方法。注解的成员变量在注解的定义中以“无形参的方法”形式来声明，其方法名定义了该成员变量的名字，其返回值定义了该成员变量的类型。
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface TestAnnotation {
+    int id();
+    String msg();}
+上面代码定义了 TestAnnotation 这个注解中拥有 id 和 msg 两个属性。在使用的时候，我们应该给它们进行赋值。
+赋值的方式是在注解的括号内以 value=”” 形式，多个属性之前用 ，隔开。
+@TestAnnotation(id=3,msg="hello annotation")
+public class Test {}
+
+
+
+
+
+
+
+
+··············反射和注解
+@TestAnnotation()
+public class Test {
+
+    public static void main(String[] args) {
+
+        boolean hasAnnotation = Test.class.isAnnotationPresent(TestAnnotation.class);
+
+        if ( hasAnnotation ) {
+            TestAnnotation testAnnotation = Test.class.getAnnotation(TestAnnotation.class);
+
+            System.out.println("id:"+testAnnotation.id());
+            System.out.println("msg:"+testAnnotation.msg());
+        }
+
+    }
+
+}
+
+
+
+
+
+
+
+博客
+https://blog.csdn.net/briblue/article/details/73824058
+注解本身没啥用，只有结合反射才有用
+结合反射可以做类似mybatis的ORM
+https://ke.qq.com/webcourse/index.html#course_id=62476&term_id=100200181&taid=997089542730764&vid=u140044f0v6
+
+
+

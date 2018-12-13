@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lt.aop.dao.PeopleMapper">
+
+
+
+
+	<resultMap type="com.lt.aop.entity.People" id="people">
+		<id column="id" jdbcType="INTEGER" property="gid" />
+		<result column="name" jdbcType="VARCHAR" property="area" />
+		<result column="money" jdbcType="INTEGER" property="deptname" />
+		<association property="dept" javaType="com.lt.aop.entity.Dept">
+			<id column="id" property="id" />
+			<result column="deptname" property="deptname" />
+		</association>
+
+
+
+
+
+	</resultMap>
+
+	<update id="out" parameterType="map">
+		update people set money = money -
+		#{money} where id = #{out}
+	</update>
+
+	<update id="in" parameterType="map">
+		update people set money = money +
+		#{money} where id = #{in}
+	</update>
+
+</mapper>

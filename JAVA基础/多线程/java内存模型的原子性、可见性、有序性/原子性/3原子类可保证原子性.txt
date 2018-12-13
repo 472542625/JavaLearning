@@ -1,0 +1,10 @@
+
+在2中发现加了volatile关键字的变量还是会发生线程安全问题
+
+AtomicInteger这种一系列原子类可以解决这个问题
+
+将static int count = 0 ；
+改为下面的这种
+static AtomicInteger count = new AtomicInteger （0）；
+
+
