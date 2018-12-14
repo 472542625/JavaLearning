@@ -156,3 +156,143 @@
    
    
  
+
+## repeatable read 重复读
+> ### select 
+>这种是读取的时候加锁，因此不会有脏读，
+>A客户端
+ ```mysql use test;
+  set transaction isolation level repeatable read; 
+  start transaction;
+  mysql> select * from person;
+  +----+------+
+  | id | age  |
+  +----+------+
+  |  1 |    7 |
+  |  2 |   99 |
+  |  3 |  100 |
+  |  4 |  101 |
+  |  5 |  102 |
+  |  7 |  200 |
+  |  8 |  201 |
+  |  9 |  201 |
+  | 10 |  203 |
+  | 11 |  203 |
+  | 12 |  204 |
+  +----+------+
+  update person set age = age - 1 where id = 1; 
+   mysql> select * from person;
+   +----+------+
+   | id | age  |
+   +----+------+
+   |  1 |    6 |
+   |  2 |   99 |
+   |  3 |  100 |
+   |  4 |  101 |
+   |  5 |  102 |
+   |  7 |  200 |
+   |  8 |  201 |
+   |  9 |  201 |
+   | 10 |  203 |
+   | 11 |  203 |
+   | 12 |  204 |
+   +----+------+
+  commit;
+ ```
+>B客户端
+ ```mysql use test;
+  set transaction isolation level repeatable read; 
+  start transaction;  
+  mysql> select * from person;
+   +----+------+
+   | id | age  |
+   +----+------+
+   |  1 |    7 |
+   |  2 |   99 |
+   |  3 |  100 |
+   |  4 |  101 |
+   |  5 |  102 |
+   |  7 |  200 |
+   |  8 |  201 |
+   |  9 |  201 |
+   | 10 |  203 |
+   | 11 |  203 |
+   | 12 |  204 |
+   +----+------+
+   
+ ```
+>发现A客户端commit了以后，B未commit之前select的值还是7，`解决了重复读数据不一致的问题`  
+
+> ### update   
+>  类似read uncommitted，一个事务更新，行数据被锁，不能再同时更新    
+ 
+ 
+> ### insert   
+>发现没有commit之前均可以insert，事务彼此之间不受影响，`但是不能读未commit的数据`    
+>A客户端  
+```mysql use test;
+   set transaction isolation level repeatable read; 
+   start transaction;    
+    select * from person;
+    +----+------+
+    | id | age  |
+    +----+------+
+    |  1 |    6 |
+    |  2 |   99 |
+    |  3 |  100 |
+    |  4 |  101 |
+    |  5 |  102 |
+    |  7 |  200 |
+    |  8 |  201 |
+    |  9 |  201 |
+    | 10 |  203 |
+    | 11 |  203 |
+    | 12 |  204 |
+    +----+------+
+   insert into person(age) values(300);
+   commit;
+   ```
+>B客户端  
+```mysql use test;
+   set transaction isolation level repeatable read;  
+   start transaction;     
+   select * from person;  
+   +----+------+
+   | id | age  |
+   +----+------+
+   |  1 |    6 |
+   |  2 |   99 |
+   |  3 |  100 |
+   |  4 |  101 |
+   |  5 |  102 |
+   |  7 |  200 |
+   |  8 |  201 |
+   |  9 |  201 |
+   | 10 |  203 |
+   | 11 |  203 |
+   | 12 |  204 |
+   +----+------+发现没有查到A插入的新数据，发生了幻读
+   ```
+ 
+ 
+   
+ 
+## serializable 串行化
+> ### insert    
+>A客户端  
+```mysql use test;
+   set transaction isolation level serializable; 
+   start transaction;    
+   select * from person;
+   ```
+>B客户端  
+```mysql use test;
+   set transaction isolation level serializable;  
+   start transaction;     
+   insert into person(age) values(301);发现锁住了
+  
+   ```
+ 
+ 
+   
+ 
