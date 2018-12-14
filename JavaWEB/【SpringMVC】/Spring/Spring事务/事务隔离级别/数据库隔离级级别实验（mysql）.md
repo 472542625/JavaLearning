@@ -285,7 +285,7 @@
    start transaction;    
    select * from person;
    ```
->B客户端  
+>B客户端   
 ```mysql use test;
    set transaction isolation level serializable;  
    start transaction;     
