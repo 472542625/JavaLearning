@@ -1,3 +1,7 @@
+连接数据库
+psql -h localhost -p 5432    bjgreen postgres
+
+
 创建
 CREATE TABLE point ( ID int4 , ROAD_NAME varchar(25), geom geometry(point,4326));  
 
