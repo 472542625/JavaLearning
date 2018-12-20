@@ -9,9 +9,9 @@ windows就右击数据库备份，然后再需要安装的服务器上新建数据库，右击恢复就行了
 
 # 导出sql格式文件
 ## 导出数据库中指定的数据表  
-
+```mysql
 pg_dump -h localhost -p 5432 -U postgres --column-inserts -t daxing_treespecies（这个是数据表名称） -f d://daxing_treespecies.sql postgis（这个是数据库名称）
-
+```
 
 
 
