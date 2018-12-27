@@ -1,5 +1,0 @@
-Ctrl+Shift+[ 折叠代码
-sublime自动排版ctrl+alt+f
-/** tab自动注释函数
-ctrl+k再按ctrl+1自动折叠所有函数
-ctrl+k再按ctrl+0自动展开所有函数

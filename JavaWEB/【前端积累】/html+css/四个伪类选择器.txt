@@ -1,15 +1,0 @@
-a:link  指值元素没有被访问过的状态。a:visited 指元素已经访问的状态。
-a:hover  指鼠标经过元素的状态。
-a:active 指鼠标按下激活元素的状态
-
-
-#rightbox .rightbox4:hover{
-	 width: 100px;
-	 height: 100px;
-  
-   
-	 background-color: green;
- 
-    
-
-}

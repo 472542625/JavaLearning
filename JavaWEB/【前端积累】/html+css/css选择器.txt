@@ -1,1 +1,0 @@
-.two span{XXX}   指对类two里面的span标签进行样式化

@@ -1,5 +1,0 @@
-Math
-Date
-String
-Array
-Object
