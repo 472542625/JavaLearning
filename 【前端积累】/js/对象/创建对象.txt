@@ -1,0 +1,19 @@
+1.系统构造函数Object
+Object obj = new Object();
+obj.name='22';
+obj.age='12';
+obj.sayhi=function(){
+}
+2.自定义构造函数
+function person(){
+this.name='22';
+this.age='12';
+this.sayhi=function(){
+}
+}
+
+var obj = new person();
+3.字面量的方式 
+var obj ={};
+obj.name='1';
+obj.age=10;

@@ -1,0 +1,23 @@
+
+
+var fs = require（'fs'）
+var template = require（'art-template '） 
+fs.readFile('./tp1.html',function(err,data){
+           if(err){
+                   return console.log('读取文件失败了');
+          }
+
+        //下面就是使用模板引擎解析替换data中的模板字符串就可以了
+       var ret = template.render(data.toString(),{
+       name:'jack',
+       age:18,
+       province:'北京'
+       hobbies:[
+       '写代码',
+       '唱歌'
+       ]                 
+      })
+})
+
+
+ 

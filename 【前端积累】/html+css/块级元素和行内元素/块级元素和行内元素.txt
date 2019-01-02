@@ -1,0 +1,12 @@
+
+
+display:block把行内元素转为块元素
+display:inline把块级元素转为行内元素
+还有个inline-block
+
+
+小技巧
+
+1、在设置div的text-align:center之后，div中的元素居中，因为行内元素是像文字一样
+2、行高line-height等于盒子的高度，可以让单行文本垂直居中
+

@@ -1,0 +1,20 @@
+gulp.src(['./js/*.js','./css/*.css,'./html/*.html']) 	//读文件
+gulp.dest()    //
+
+例子//将src.js拷贝到dist目录下
+gulp.src('./js/src.js').pipe(gulp.dest(./dist))
+最后运行node glupfile.js
+
+
+
+
+gulp.task('mytask',['task1','task2','task3','task4'],function(){
+
+
+
+})
+gulp mytask//这样是先执行task1,task2,task3,task4后再执行mytask任务
+
+
+
+
