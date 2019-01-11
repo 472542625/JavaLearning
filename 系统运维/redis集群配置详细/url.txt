@@ -1,1 +1,12 @@
 http://www.cnblogs.com/ding2016/p/7892542.html
+
+https://ke.qq.com/webcourse/index.html#cid=353724&term_id=100420524&taid=2835034897999292&type=1024&vid=e1430rls29d
+（具体步骤）
+
+
+https://ke.qq.com/webcourse/index.html#cid=353724&term_id=100420524&taid=2835043487933884&type=1024&vid=m1430qlp10v
+修改redis的配置文件，可以远程访问
+完事记得在阿里云的端口那里打开6379端口
+
+redis的src目录下
+./redis-server ../redis.conf
