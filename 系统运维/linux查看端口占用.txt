@@ -1,5 +1,10 @@
 ps -aux|grep tomcat  ///直接查程序名称
-
+第二列是pid
 （附）ps -ef/ps aux： 这两个命令都是查看当前系统正在运行进程，两者的区别是展示格式不同。如果想要查看特定的进程可以使用这样的格式：ps aux|grep redis （查看包括redis字符串的进程）
 
-netstat –anp|grep 端口号            ////直接查端口号
+netstat -anp|grep 8085  ////直接查端口号
+最后一列是pid号/程序名称
+
+
+
+kill -9 pid号  杀死进程
