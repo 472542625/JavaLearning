@@ -1,2 +1,0 @@
-netstat  -ano|findstr 端口号            ///查询该端口的进程编号PID
-tasklist -ano|findstr PID               ///查询该进程具体详情

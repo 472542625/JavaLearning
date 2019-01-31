@@ -1,5 +1,7 @@
 1、基本的获取方式
-在一个GetFeature请求中，需包含以下参数：1、service，服务请求方式，固定为wfs；2、request，请求方法，固定为GetFeature；3、version，版本，可选1.1.0、2.0.0等；4、typename，为你需要请求的图层名称。一个请求的URL中包含了以上参数的时候，会返回正确的值。
+在一个GetFeature请求中，需包含以下参数：1、service，服
+
+务请求方式，固定为wfs；2、request，请求方法，固定为GetFeature；3、version，版本，可选1.1.0、2.0.0等；4、typename，为你需要请求的图层名称。一个请求的URL中包含了以上参数的时候，会返回正确的值。
 示例url：
 http://localhost:8085/geoserver/climate/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=climate:temperature_asia1981
 返回的是kml格式的xml文档，具体见下
