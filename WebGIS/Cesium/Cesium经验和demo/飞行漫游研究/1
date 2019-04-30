@@ -1,0 +1,83 @@
+                  var startLatitude = 34.21768366124025 ;
+                    var startLongitude =108.95851747443142;
+                    viewer.clock.shouldAnimate = true;
+                    var endLongitude;
+                    var endLatitude;
+                    var startTime = Cesium.JulianDate.now();
+                    var isConstant = true;
+                    var redLine =  viewer.entities.add({
+                        polyline : {
+                            // This callback updates positions each frame.
+                            positions : new Cesium.CallbackProperty(function(time, result) {
+
+
+                                endLatitude = startLatitude + 0.001 * Cesium.JulianDate.secondsDifference(time, startTime);
+                                return Cesium.Cartesian3.fromDegreesArray([startLongitude, startLatitude, startLongitude, endLatitude], Cesium.Ellipsoid.WGS84, result);
+                            }, isConstant),
+                            width : 0,
+                            material : Cesium.Color.RED
+                        }
+                    });
+                    var startCartographic = Cesium.Cartographic.fromDegrees(startLongitude, startLatitude);
+// use scratch object to avoid new allocations per frame.
+                    var endCartographic = new Cesium.Cartographic();
+                    var scratch = new Cesium.Cartographic();
+                    var geodesic = new Cesium.EllipsoidGeodesic();
+
+                    function getLength(time, result) {
+                        // Get the end position from the polyLine's callback.
+                        var endPoint = redLine.polyline.positions.getValue(time, result)[1];
+                        endCartographic = Cesium.Cartographic.fromCartesian(endPoint);
+
+                        geodesic.setEndPoints(startCartographic, endCartographic);
+                        var lengthInMeters = Math.round(geodesic.surfaceDistance);
+                        return (lengthInMeters / 1000).toFixed(1) + ' km';
+                    }
+
+                    function getMidpoint(time, result) {
+                        // Get the end position from the polyLine's callback.
+
+                    /////所有属性的实例均是Property的子类型，引入属性类层次而不是使用基本类型的原因是，某些属性是随着时间而变化的。
+                    /////要得到属性的原始值，需要调用Property.getValue()方法，获取当前时间的线要素坐标数组，数组[1]则是线要素的末端点坐标
+                        var endPoint = redLine.polyline.positions.getValue(time, result)[1];
+                        endCartographic = Cesium.Cartographic.fromCartesian(endPoint);
+
+                        geodesic.setEndPoints(startCartographic, endCartographic);
+                        var midpointCartographic = geodesic.interpolateUsingFraction(0.5, scratch);
+                        return Cesium.Cartesian3.fromRadians(midpointCartographic.longitude, midpointCartographic.latitude);
+                    }
+
+                    var label = viewer.entities.add({
+                        position : new Cesium.CallbackProperty(getMidpoint, isConstant),
+                        label : {
+                            // This callback updates the length to print each frame.
+                            text: new Cesium.CallbackProperty(getLength, isConstant),
+                            font : '20px sans-serif',
+                            pixelOffset : new Cesium.Cartesian2(0.0, 20)
+                        }
+                    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   // Keep the view centered.
+                    viewer.trackedEntity = label;
+                    //停止定位
+                    // viewer.trackedEntity = null;

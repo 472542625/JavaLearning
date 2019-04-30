@@ -1,0 +1,25 @@
+//
+2.世界坐标转地理坐标（弧度）
+var cartographic = scene.globe.ellipsoid.cartesianToCartographic(cartesian);
+或
+var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+3.世界坐标转屏幕坐标
+var pick = Cesium.SceneTransforms.wgs84ToWindowCoordinates(viewer.scene, cartesian);
+4.地理坐标（弧度）转经纬度坐标
+var point=[ cartographic.longitude / Math.PI * 180, cartographic.latitude / Math.PI * 180];
+5.地理坐标（弧度）转世界坐标
+var  cartesian = scene.globe.ellipsoid. cartographicTo Cartesian (cartographic);
+6.经纬度坐标转地理坐标（弧度）
+var cartographic = Cesium.Cartographic.fromDegree(point);
+7.经纬度坐标转世界坐标
+var  cartesian  =  Cesium. Cartesian 3.fromDegree(point);
+
+
+//弧度和角度转换
+弧度 = Cesium.Math.toRadians(角度)
+角度 = 14:28 2019/4/24/周三(弧度)
+
+//获取点从经纬度
+var position = Cesium.Cartesian3.fromDegrees(-115.0, 37.0);
+//获取点数组从数组经纬度
+var positions = Cesium.Cartesian3.fromDegreesArray([-115.0, 37.0, -107.0, 33.0]);

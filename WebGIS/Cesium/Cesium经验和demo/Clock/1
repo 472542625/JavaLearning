@@ -1,0 +1,21 @@
+
+
+
+
+
+///cesium时间创建
+Cesium.JulianDate.fromDate(new Date(2017,7,11));
+///cesium时间增加
+Cesium.JulianDate.addSeconds(start, 360, new Cesium.JulianDate());
+
+
+// 设置始时钟始时间
+view.clock.startTime = start.clone();
+// 设置时钟当前时间
+view.clock.currentTime = start.clone();
+// 设置始终停止时间
+view.clock.stopTime  = stop.clone();
+// 时间速率，数字越大时间过的越快
+view.clock.multiplier = 10;
+// 时间轴
+view.timeline.zoomTo(start,stop);

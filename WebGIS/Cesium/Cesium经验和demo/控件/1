@@ -1,0 +1,8 @@
+掌控cesium的控件
+
+
+baseLayerPicker///控制的是底图控件
+下面代码是控制底图按钮的img的logo
+viewer.baseLayerPicker.container.getElementsByClassName("cesium-baseLayerPicker-selected")[0].setAttribute('style', 'display:block;');
+
+viewer.baseLayerPicker.container.getElementsByClassName("cesium-baseLayerPicker-selected")[0].setAttribute('src', '/lib/cesium/Build/Cesium/Widgets/Images/ImageryProviders/esriWorldImagery.png');
