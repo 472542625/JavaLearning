@@ -1,0 +1,5 @@
+
+
+
+select setval('自增名称',(select max(id) from tablename)+1,false);
+这里要加个1 ，就是从最大的+1开始

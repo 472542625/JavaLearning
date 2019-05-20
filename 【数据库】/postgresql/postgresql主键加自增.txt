@@ -5,3 +5,7 @@ no minvalue
 no maxvalue
 cache 1;
 alter table daxing_user alter column uid set default nextval('event_id_seq');
+
+
+
+
