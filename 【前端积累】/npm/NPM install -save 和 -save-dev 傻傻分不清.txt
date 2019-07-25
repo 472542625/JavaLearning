@@ -1,13 +1,15 @@
 https://www.cnblogs.com/limitcode/p/7906447.html
-npm install moduleName # °²×°Ä£¿éµ½ÏîÄ¿Ä¿Â¼ÏÂ
+npm install æ˜¯ç›´æ¥ä¸‹è½½package.jsonä¸­çš„devDependencieså’Œdependencies
 
-npm install -g moduleName # -g µÄÒâË¼ÊÇ½«Ä£¿é°²×°µ½È«¾Ö£¬¾ßÌå°²×°µ½´ÅÅÌÄÄ¸öÎ»ÖÃ£¬Òª¿´ npm config prefix µÄÎ»ÖÃ¡£
+npm install moduleName # å®‰è£…æŸä¸ªæ¨¡å—åˆ°é¡¹ç›®ç›®å½•ä¸‹
 
-npm install -save moduleName # -save µÄÒâË¼ÊÇ½«Ä£¿é°²×°µ½ÏîÄ¿Ä¿Â¼ÏÂ£¬²¢ÔÚpackageÎÄ¼şµÄdependencies½ÚµãĞ´ÈëÒÀÀµ¡£
+npm install -g moduleName # -g çš„æ„æ€æ˜¯å°†æ¨¡å—å®‰è£…åˆ°å…¨å±€ï¼Œå…·ä½“å®‰è£…åˆ°ç£ç›˜å“ªä¸ªä½ç½®ï¼Œè¦çœ‹ npm config prefix çš„ä½ç½®ã€‚
 
-npm install -save-dev moduleName # -save-dev µÄÒâË¼ÊÇ½«Ä£¿é°²×°µ½ÏîÄ¿Ä¿Â¼ÏÂ£¬²¢ÔÚpackageÎÄ¼şµÄdevDependencies½ÚµãĞ´ÈëÒÀÀµ¡£
+npm install -save moduleName # -save çš„æ„æ€æ˜¯å°†æ¨¡å—å®‰è£…åˆ°é¡¹ç›®ç›®å½•ä¸‹ï¼Œå¹¶åœ¨packageæ–‡ä»¶çš„dependenciesèŠ‚ç‚¹å†™å…¥ä¾èµ–ã€‚
+
+npm install -save-dev moduleName # -save-dev çš„æ„æ€æ˜¯å°†æ¨¡å—å®‰è£…åˆ°é¡¹ç›®ç›®å½•ä¸‹ï¼Œå¹¶åœ¨packageæ–‡ä»¶çš„devDependenciesèŠ‚ç‚¹å†™å…¥ä¾èµ–ã€‚
 
 
-devDependencies ½ÚµãÏÂµÄÄ£¿éÊÇÎÒÃÇÔÚ¿ª·¢Ê±ĞèÒªÓÃµÄ£¬±ÈÈçÏîÄ¿ÖĞÊ¹ÓÃµÄ gulp £¬Ñ¹Ëõcss¡¢jsµÄÄ£¿é¡£
-ÕâĞ©Ä£¿éÔÚÎÒÃÇµÄÏîÄ¿²¿ÊğºóÊÇ²»ĞèÒªµÄ£¬ËùÒÔÎÒÃÇ¿ÉÒÔÊ¹ÓÃ -save-dev µÄĞÎÊ½°²×°¡£
-Ïñ express ÕâĞ©Ä£¿éÊÇÏîÄ¿ÔËĞĞ±Ø±¸µÄ£¬Ó¦¸Ã°²×°ÔÚ dependencies ½ÚµãÏÂ£¬ËùÒÔÎÒÃÇÓ¦¸ÃÊ¹ÓÃ -save µÄĞÎÊ½°²×°¡£
+devDependencies èŠ‚ç‚¹ä¸‹çš„æ¨¡å—æ˜¯æˆ‘ä»¬åœ¨å¼€å‘æ—¶éœ€è¦ç”¨çš„ï¼Œæ¯”å¦‚é¡¹ç›®ä¸­ä½¿ç”¨çš„ gulp ï¼Œå‹ç¼©cssã€jsçš„æ¨¡å—ã€‚
+è¿™äº›æ¨¡å—åœ¨æˆ‘ä»¬çš„é¡¹ç›®éƒ¨ç½²åæ˜¯ä¸éœ€è¦çš„ï¼Œæ‰€ä»¥æˆ‘ä»¬å¯ä»¥ä½¿ç”¨ -save-dev çš„å½¢å¼å®‰è£…ã€‚
+åƒ express è¿™äº›æ¨¡å—æ˜¯é¡¹ç›®è¿è¡Œå¿…å¤‡çš„ï¼Œåº”è¯¥å®‰è£…åœ¨ dependencies èŠ‚ç‚¹ä¸‹ï¼Œæ‰€ä»¥æˆ‘ä»¬åº”è¯¥ä½¿ç”¨ -save çš„å½¢å¼å®‰è£…ã€‚
