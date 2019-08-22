@@ -1,13 +1,14 @@
-¡¤¡¤a.jsÖĞ
+Â·Â·a.jsä¸­
 export default{
 name:"lt",
 age:20
 }
-¡¤¡¤b.jsÖĞ
-import  person from './a.js'
+Â·Â·b.jsä¸­
+import  person from './a.js' //personä¸éœ€è¦åŠ {}
 console.log(person);
-ÒÔÉÏÊÇÊ¹ÓÃ·½Ê½
+ä»¥ä¸Šæ˜¯ä½¿ç”¨æ–¹å¼
 
 
 
-ÖÁÓÚexportÓÃµÄÊ±ºòÔÙ¿´
+è‡³äºexportçœ‹ä¾‹å­
+ 
